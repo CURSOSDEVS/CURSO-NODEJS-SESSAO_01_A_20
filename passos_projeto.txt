@@ -1,0 +1,3 @@
+- criar pasta do projeto
+- criar pasta Express
+- Dentro da pasta Express, dar comando 'npm init'
