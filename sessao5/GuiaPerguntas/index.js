@@ -20,6 +20,16 @@ app.set('view engine', 'ejs');
     });
 });*/
 
+//estrutura de repeticão foreach
+var produtos = [
+    {nome:'Doritos', preco:3.14},
+    {nome:'Coca-Cola', preco:5},
+    {nome:'Leite', preco:1.45},
+    {nome:'Carne', preco:15},
+    {nome:'HeadBull', preco:6.45},
+
+]
+    
 //utilizando parâmetros e passando para a pagina
 app.get('/:nome/:lang', (req, res)=>{
     //variavel que serão mostradas na pagina
@@ -32,7 +42,8 @@ app.get('/:nome/:lang', (req, res)=>{
         lang: lang,
         empresa: 'Guia do programador',
         inscritos: 8000,
-        msg: exibirmsg
+        msg: exibirmsg,
+        produtos: produtos
     });
 });
 

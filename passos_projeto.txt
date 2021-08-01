@@ -23,5 +23,5 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Extrutura condicional com o EJS"
+- "Extrutura de repeticao foreach com o EJS"
 

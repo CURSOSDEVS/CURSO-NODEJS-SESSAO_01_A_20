@@ -21,6 +21,24 @@
     <% } else{ %>
         <h3>Nenhum erro</h3>
     <% } %>
-    
+
+    <!--Estrutura de repetição do foreach no JS-->
+    <% if(produtos) { %>
+        <table class="table">
+            <thead>
+                <th>Nome</th>
+                <th>Preço</th>
+            </thead>
+            <tbody>
+                <% produtos.forEach(function(produto){ %>
+                    <tr>
+                        <td><%= produto.nome %></td>
+                        <td><%= produto.preco %> </td>
+                    </tr>           
+                <% } ) %>
+            </tbody>
+        </table>
+    <% } %>
+     
 </body>
 </html>
