@@ -25,12 +25,14 @@ app.get('/:nome/:lang', (req, res)=>{
     //variavel que serão mostradas na pagina
     var nome = req.params.nome;
     var lang = req.params.lang;
+    var exibirmsg = false;
 
     res.render('index',{
         nome: nome,
         lang: lang,
         empresa: 'Guia do programador',
-        inscritos: 8000
+        inscritos: 8000,
+        msg: exibirmsg
     });
 });
 
