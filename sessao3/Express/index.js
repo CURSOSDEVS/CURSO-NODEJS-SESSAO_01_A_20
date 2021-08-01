@@ -14,12 +14,12 @@ app.get("/", function(req, res){
 //criando uma rota para o blog
 /*app.get("/Blog", function(req, res){
     res.send("<h1>Bem vindo ao meu Blog!.</h1>");
-});*/
+});
 
 //criando uma rota para acessar o canal
 app.get("/canal/youtube", function(req, res){
     res.send("<h1>Bem vindo ao meu canal!</h1>");
-});
+});*/
 
 //criando rota utilizando parâmetros
 //req são os dados enviados pelo usuário
@@ -39,6 +39,18 @@ app.get("/blog/:artigo?", function(req, res){
         res.send("<h1>Bem vindo ao meu Blog!</h1>");
     }else{
         res.send("<h1>Bem vindo ao meu Blog de "+artigo+"!</h1>");
+    }
+    
+});
+
+//query params, o usuário fornece o parâmetro da maneira abaixo
+//ex: /canal/youtube?canal=receitas
+app.get("/canal/youtube", function(req, res){
+    var canal = req.query["canal"];
+    if(canal){
+        res.send(canal);
+    }else{
+        res.send("Nenhum canal fornecido");
     }
     
 });
