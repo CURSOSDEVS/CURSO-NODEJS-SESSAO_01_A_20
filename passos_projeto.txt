@@ -2,10 +2,23 @@
 - criar pasta Express
 - Dentro da pasta Express, dar comando 'npm init'
 - Dar o comando 'npm install express --save' dentro da pasta Express para realizar a instalação
-- instalar o modemon para reinicialização do servidor - npm install nodemon -g
+- instalar o nodemon para reinicialização do servidor - npm install nodemon -g
 - criar o arquivo inicial index.js dentro da pasta express
 - importar o Express para dentro do arquivo inicial 'const express = require("express");
 - instanciar o express no aplicativo 'const app = express()';
+- rodar o app utilizando : nodemon 'index.js'
+- instalar o Mysql Server comunity
+- Utilizar os comandos no prompt para abrir o Mysql - "mysql -h localhost -u root -p"
+   . Show Databases; (mostra os bancos de dados)
+   . Criar banco de dados ex: CREATE DATABASE sistemaDeCadastro; (criando o banco de dados)
+   . Selecionar o banco de dados ex: USE sistemaDeCadastro; (utilizar o banco de dados)
+   . Para criar tabelas ex:CREATE TABLE usuarios(nome VARCHAR(50), email VARCHAR(100), idade INT);
+   . Descrever a tabela ex: DESCRIBE usuarios;
+   . Inserindo dados na tabela ex: INSERT INTO usuarios(nome, email, idade) VALUES('Pedro','Pedro@com',33);
+   . Mostrando dados da tabela ex: SELECT * FROM usuarios;
+   . ex: select nome from usuarios where idade <= 35 and idade >= 18;
+   . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
+   . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Trabalhando com parâmetros obrigatorios e nao obrigatorios"
+- "Instalando o MySQL, criando banco de dados e tabela no Mysql via prompt"
 
