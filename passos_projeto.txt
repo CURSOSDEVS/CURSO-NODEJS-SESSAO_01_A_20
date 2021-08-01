@@ -23,5 +23,5 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Configurando o EJS com Express"
+- "Configurando o EJS com Express, criandos paginas html com ejs"
 
