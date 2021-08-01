@@ -1,3 +1,8 @@
 - criar pasta do projeto
 - criar pasta Express
 - Dentro da pasta Express, dar comando 'npm init'
+- Dar o comando 'npm install express --save' dentro da pasta Express para realizar a instalação
+- criar o arquivo inicial index.js dentro da pasta express
+- importar o Express para dentro do arquivo inicial 'const express = require("express");
+- instanciar o express no aplicativo 'const app = express()';
+
