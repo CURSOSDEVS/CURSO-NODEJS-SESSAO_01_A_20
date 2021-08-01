@@ -1,12 +1,15 @@
 - criar pasta do projeto
-- criar pasta Express
-- Dentro da pasta Express, dar comando 'npm init'
-- Dar o comando 'npm install express --save' dentro da pasta Express para realizar a instalação
+- criar a pasta views dentro da pasta do projeto, que será utilizada com o EJS, onde serão criados os arquivos HTML com extensão .ejs
+- Dentro da pasta do projeto, inicializar o npm usando o comando 'npm init'
+- Dar o comando 'npm install express --save' dentro da pasta do projeto para realizar a instalação
+- Dar o comando 'npm install ejs --save' para instalar o gerenciador de template EJS
 - instalar o nodemon para reinicialização do servidor - npm install nodemon -g
 - criar o arquivo inicial index.js dentro da pasta express
 - importar o Express para dentro do arquivo inicial 'const express = require("express");
 - instanciar o express no aplicativo 'const app = express()';
+- setar o ejs para rodar no express ex: app.set('view engine', 'ejs');
 - rodar o app utilizando : nodemon 'index.js'
+
 - instalar o Mysql Server comunity
 - Utilizar os comandos no prompt para abrir o Mysql - "mysql -h localhost -u root -p"
    . Show Databases; (mostra os bancos de dados)
@@ -20,5 +23,5 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Instalando o MySQL, criando banco de dados e tabela no Mysql via prompt"
+- "Configurando o EJS com Express"
 
