@@ -6,6 +6,10 @@ const app = express();
 //estamos setando o ejs para trabalhar no express
 app.set('view engine', 'ejs');
 
+//define que o aplicativo usará arquivos estaticos, informando 
+//em que pasta eles se estão localizados. Deve-se criar a pasta
+app.use(express.static('public'));
+
 //criando rota principal da aplicação e passando variaveis
 /*app.get('/', (req, res)=>{
     //variavel que serão mostradas na pagina
