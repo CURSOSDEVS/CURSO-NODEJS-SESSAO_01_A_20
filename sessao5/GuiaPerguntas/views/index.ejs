@@ -5,43 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
     <title>Guia perguntas</title>
 </head>
 <body>
-    <h1>Guia de Perguntas</h1>
-    <hr>
-    <h3>Listas de perguntas</h3>
-    <p>Nome :<%= nome %></p>
-    <p>Linguagem :<%= lang %></p>
-    <p>Empresa :<%= empresa %></p>
-    <p>Inscritos :<%= inscritos %></p>
-    <hr>
-    
-    <% if(msg){ %>
-        <h3>Isso é uma mensagem de erro</h3>
-    <% } else{ %>
-        <h3>Nenhum erro</h3>
-    <% } %>
+    <h1>Estilo do bootstrap</h1>
 
-    <!--Estrutura de repetição do foreach no JS-->
-    <% if(produtos) { %>
-        <table class="table">
-            <thead>
-                <th>Nome</th>
-                <th>Preço</th>
-            </thead>
-            <tbody>
-                <% produtos.forEach(function(produto){ %>
-                    <tr>
-                        <td><%= produto.nome %></td>
-                        <td><%= produto.preco %> </td>
-                    </tr>           
-                <% } ) %>
-            </tbody>
-        </table>
-    <% } %>
-
-    <img src="/img/xiomi.jpg"
-     
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js"></script>
 </html>

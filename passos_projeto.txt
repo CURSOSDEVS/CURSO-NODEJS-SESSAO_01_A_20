@@ -9,6 +9,10 @@
 - instanciar o express no aplicativo 'const app = express()';
 - setar o ejs para rodar no express ex: app.set('view engine', 'ejs');
 - rodar o app utilizando : nodemon 'index.js'
+- criar pasta 'public' onde serão adicionados os arquivos estáticos utilizados no aplicativo
+- configurando o app para o express usar aquivos estaticos ex: app.use(express.static('public');
+- dentro da pasta 'public' crie as outras pastas ex: css, img, js
+- baixar o bootstrap e 
 
 - instalar o Mysql Server comunity
 - Utilizar os comandos no prompt para abrir o Mysql - "mysql -h localhost -u root -p"
@@ -23,5 +27,7 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Processando arquivos estáticos tipo css, javascript, imagens, dados e outro com o EJS"
+- "Instalando o bootstrap e limpando arquivos basicos, incluindo as referências na index.ejs para o booststrap funcionar na página do projeto"
+
+
 
