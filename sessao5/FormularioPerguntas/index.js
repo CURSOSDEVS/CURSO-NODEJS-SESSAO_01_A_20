@@ -11,9 +11,14 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
  
 //utilizando parâmetros e passando para a pagina
-app.get('/', (req, res)=>{
+app.get('/perguntar', (req, res)=>{
 
     res.render('perguntar');
+});
+
+//rota da pagina principal
+app.get('/',(req,res)=>{
+    res.render('index');
 });
 
 //rodando a aplicação

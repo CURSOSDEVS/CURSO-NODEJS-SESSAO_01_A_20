@@ -27,7 +27,7 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Iniciando o formulário de perguntas, criando a rota de perguntas, criando formulario na pagina perguntar"
+- "Adicionando card no formulario, custumizando o css  da pagina, criando uma nav-bar."
 
 
 
