@@ -12,7 +12,9 @@
 - criar pasta 'public' onde serão adicionados os arquivos estáticos utilizados no aplicativo
 - configurando o app para o express usar aquivos estaticos ex: app.use(express.static('public');
 - dentro da pasta 'public' crie as outras pastas ex: css, img, js
-- baixar o bootstrap e 
+- baixar o bootstrap e inserir as referências nas páginas
+- criar os partials do header, navbar e footer para as páginas, inserir os includes nas paginas.
+
 
 - instalar o Mysql Server comunity
 - Utilizar os comandos no prompt para abrir o Mysql - "mysql -h localhost -u root -p"
@@ -27,7 +29,7 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Adicionando card no formulario, custumizando o css  da pagina, criando uma nav-bar."
+- "Criando a página inicial, utilizando 'partials' nas páginas, criando partials header.ejs, navbar.ejs , footer.ejs, alterando a pagina incluindo os partials"
 
 
 
