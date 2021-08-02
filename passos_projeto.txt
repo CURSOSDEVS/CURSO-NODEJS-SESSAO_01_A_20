@@ -4,6 +4,7 @@
 - Dar o comando 'npm install express --save' dentro da pasta do projeto para realizar a instalação
 - Dar o comando 'npm install ejs --save' para instalar o gerenciador de template EJS
 - instalar o nodemon para reinicialização do servidor - npm install nodemon -g
+
 - criar o arquivo inicial index.js dentro da pasta express
 - importar o Express para dentro do arquivo inicial 'const express = require("express");
 - instanciar o express no aplicativo 'const app = express()';
@@ -14,7 +15,8 @@
 - dentro da pasta 'public' crie as outras pastas ex: css, img, js
 - baixar o bootstrap e inserir as referências nas páginas
 - criar os partials do header, navbar e footer para as páginas, inserir os includes nas paginas.
-
+- utilizar o express.urlencoded para capturar os dados enviados pelo formulário. Utilizar os comandos 'app.use(express.urlencoded({extended:false});'
+- utilizar o json para utilizar os dados.Utilizar o comando 'app.use(express.json());'
 
 - instalar o Mysql Server comunity
 - Utilizar os comandos no prompt para abrir o Mysql - "mysql -h localhost -u root -p"
@@ -29,7 +31,7 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Definindo o método do formulario, criando rota para receber os dados do formulário"
+- "utilizando o express.urlencoded para capturar os dados do formulário "
 
 
 
