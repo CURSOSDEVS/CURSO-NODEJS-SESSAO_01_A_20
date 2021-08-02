@@ -29,7 +29,7 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "Criando a página inicial, utilizando 'partials' nas páginas, criando partials header.ejs, navbar.ejs , footer.ejs, alterando a pagina incluindo os partials"
+- "Definindo o método do formulario, criando rota para receber os dados do formulário"
 
 
 

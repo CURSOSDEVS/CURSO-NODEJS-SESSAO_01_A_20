@@ -21,6 +21,11 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 
+//rota que irá receber os dados do formuláro enviados via post
+app.post('/salvarpergunta',(req,res)=>{
+    res.send("Formulário recebido!");
+});
+
 //rodando a aplicação
 app.listen(8080,()=>{
     console.log("App rodando");
