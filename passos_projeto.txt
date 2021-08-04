@@ -19,8 +19,13 @@
 - utilizar o json para utilizar os dados.Utilizar o comando 'app.use(express.json());'
 - instalar o Mysql Server comunity
 - instalar o workebench do mysql
-- abrir a pasta do projeto e instalar a biblioteca 'sequealize', para conexão e manipular o banco de dados dentro 
+- abrir a pasta do projeto e instalar a biblioteca 'sequelize', para conexão e manipular o banco de dados dentro 
   do node, com o comando 'npm install --save sequelize .
+- para o sequelize trabalhar com o mysql é necessário instalar a biblioteca extra 'mysql2' com o comando 
+  'npm install --save mysql2
+- Criar uma pasta 'database' e dentro dela criar um arquivo database.js onde ficará a conexão com o sequelize
+
+- "Instalando o sequelize para realizar conexao e manipulação do banco de dados, e tambem o mysql2 para permitir o sequealize trabalhar com o mysql, criando a pasta database e o arquivo database.js"
 
 
 
@@ -45,7 +50,7 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- ""
+
 
 
 

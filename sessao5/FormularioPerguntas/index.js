@@ -2,6 +2,20 @@
 const express = require("express");
 //criando uma instancia do express
 const app = express();
+//carregando a conexão no arquivo
+const connection = require('./database/database');
+
+//***********Database**********************/
+//testando a conexão, se a conexão ocorrer será executado
+//o 'then' e não será executado o 'catch'
+connection
+        .authenticate()
+        .then(()=> {
+            console.log('Conexão feita com o banco de dados')
+        })
+        .catch((msgErro)=>{
+            console.log(msgErro);
+        })
 
 //***********EJS**********************/
 //estamos setando o ejs para trabalhar no express
