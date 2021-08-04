@@ -17,8 +17,22 @@
 - criar os partials do header, navbar e footer para as páginas, inserir os includes nas paginas.
 - utilizar o express.urlencoded para capturar os dados enviados pelo formulário. Utilizar os comandos 'app.use(express.urlencoded({extended:false});'
 - utilizar o json para utilizar os dados.Utilizar o comando 'app.use(express.json());'
-
 - instalar o Mysql Server comunity
+- instalar o workebench do mysql
+- abrir a pasta do projeto e instalar a biblioteca 'sequealize', para conexão e manipular o banco de dados dentro 
+  do node, com o comando 'npm install --save sequelize .
+
+
+
+
+
+
+
+
+
+
+
+
 - Utilizar os comandos no prompt para abrir o Mysql - "mysql -h localhost -u root -p"
    . Show Databases; (mostra os bancos de dados)
    . Criar banco de dados ex: CREATE DATABASE sistemaDeCadastro; (criando o banco de dados)
@@ -31,7 +45,7 @@
    . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
    . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
 
-- "utilizando o express.urlencoded para capturar os dados do formulário "
+- ""
 
 
 
