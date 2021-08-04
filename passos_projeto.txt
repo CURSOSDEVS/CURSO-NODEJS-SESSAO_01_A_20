@@ -24,8 +24,29 @@
 - para o sequelize trabalhar com o mysql é necessário instalar a biblioteca extra 'mysql2' com o comando 
   'npm install --save mysql2
 - Criar uma pasta 'database' e dentro dela criar um arquivo database.js onde ficará a conexão com o sequelize
+- No arquvio 'database.js' utilizar o comando 'const Sequelize = require('sequelize') para carregar o sequealize
+- Criar a 'const connection = new Sequelize('nome_banco_dados','usuario(root)','senha usuario(root)',{ 
+                                             host: 'local da aplicacao(localhost)', 
+					     dialect: 'tipo de banco de dados(mysql)'});
+- Exportar a conexão com os comandos: 'module.exports = connection;
+- Ir no arquivo principal do projeto 'index.js' e carregar a conexão com o comando: 
+  'const connection = require('./database/database.js');'
+- Definir um model para criar as tabelas do banco de dados ex: 'Perguntas.js' dentro da pasta database
+- Importar o sequelize 'const Sequelize - require('selequelize');'
+- Iportar a conexão com o banco de dados - ' 'const connection = require('./database');
+- Criar o model utilizando os comandos e o json com os campos que irão compor a tabela e um json de opções que pode estar vazio:
+  'const Pergunta = connection.define('pergunta', {
+                                       tiulo:{ type: Sequelize.STRING, allowNull: false},
+				       descricao:{ type: Sequelize.TEXT, allowNull: false}
+					},{});
+- Criar comando para criar a atabela : 'Pergunta.sync({force:false}).then(()=>{console.log('tabela pergunta criada)});
+' este comando ira sincronizar o que está no model Pergunta.js 
+  com o banco de dados, o 'force' é para não forçar a criação da tabela(recriá-la)caso ela já exista no banco
+  e o '.then() é para verificar se a tabela foi criada.
+- No arquivo index.js criar uma constante que realizará a criação da tabela quando o index.js for executado.
+  com os comandos : 'const perguntaModel = require('./database/Perguntas');'. A tabela será criada automaticamente.
 
-- "Instalando o sequelize para realizar conexao e manipulação do banco de dados, e tambem o mysql2 para permitir o sequealize trabalhar com o mysql, criando a pasta database e o arquivo database.js"
+- "Criando um arquivo Pergunta.js que será um model para criar a tabela pergunta, configurado o model para criar a tabela, incluindo no index.js uma constante importando o model para criacao da tabela"
 
 
 

@@ -2,12 +2,13 @@
 const express = require("express");
 //criando uma instancia do express
 const app = express();
-//carregando a conexão no arquivo
-const connection = require('./database/database');
 
 //***********Database**********************/
+//carregando a conexão do banco de dados no arquivo
+const connection = require('./database/database');
 //testando a conexão, se a conexão ocorrer será executado
 //o 'then' e não será executado o 'catch'
+//Pode-se comentar pois foi somente para verificar se a conexão estava ocorrendo
 connection
         .authenticate()
         .then(()=> {
@@ -15,7 +16,9 @@ connection
         })
         .catch((msgErro)=>{
             console.log(msgErro);
-        })
+        });
+//importando o model Pergunta para criar a tabela pergunta
+const perguntaModel = require('./database/Perguntas');
 
 //***********EJS**********************/
 //estamos setando o ejs para trabalhar no express
