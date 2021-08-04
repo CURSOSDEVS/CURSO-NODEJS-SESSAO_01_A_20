@@ -17,8 +17,10 @@ connection
         .catch((msgErro)=>{
             console.log(msgErro);
         });
+
 //importando o model Pergunta para criar a tabela pergunta
-const perguntaModel = require('./database/Perguntas');
+//e trabalhar com os dados da tabela, inserindo, alterando, apagando etc.
+const Pergunta = require('./database/Perguntas');
 
 //***********EJS**********************/
 //estamos setando o ejs para trabalhar no express
@@ -45,11 +47,20 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 
-//rota que irá receber os dados do formuláro enviados via post
+//rota que irá receber os dados do formuláro enviados 
+//via post e irá salvar no banco de dados
 app.post('/salvarpergunta',(req,res)=>{
+    //recebendo os dados do formulário
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
-    res.send("Formulário recebido! Título: "+titulo+" Descrição: "+descricao);
+
+    //estamos utilizando a constante Pergunta que foi importada anteriormente
+    //e carrega o model da tabela perguntas
+    //após a pergunta ser salva no bd o usuário será redirecionado para a página principal
+    Pergunta.create({
+        titulo:titulo, 
+        descricao: descricao
+        }).then(()=> {res.redirect('/')});
 });
 
 //rodando a aplicação

@@ -43,10 +43,20 @@
 ' este comando ira sincronizar o que está no model Pergunta.js 
   com o banco de dados, o 'force' é para não forçar a criação da tabela(recriá-la)caso ela já exista no banco
   e o '.then() é para verificar se a tabela foi criada.
-- No arquivo index.js criar uma constante que realizará a criação da tabela quando o index.js for executado.
-  com os comandos : 'const perguntaModel = require('./database/Perguntas');'. A tabela será criada automaticamente.
+- Criar comando para exportar o modulo 'Perguntas' : 'module.exports = Pergunta;'
+- No arquivo index.js importar a constante 'Pergunta' que realizará a criação da tabela quando o index.js for executado.
+  com os comandos : 'const Pergunta = require('./database/Perguntas');'. A tabela será criada automaticamente.
+- Pegar os dados que estão sendo enviados pelo formulário 'Perguntas.ejs' e salvar no banco de dados.
+- Alterando a rota '/salvarpergunta' do arquivo index.js para salvar os dados que estão nas variáveis na tabela
+  no banco de dados. Com os comandos que irão salvar os dados na tabela:
+  'Pergunta.create({ titulo:titulo, descricao:descricao}).then(()=>{res.redirect('/ 	)' 
+   O Comando .then() irá realizar uma ação quando a pergunta for salva no banco de dados, neste caso o usuário será 
+   redirecionado para rota(pagina) principal.
 
-- "Criando um arquivo Pergunta.js que será um model para criar a tabela pergunta, configurado o model para criar a tabela, incluindo no index.js uma constante importando o model para criacao da tabela"
+	
+
+
+- "Alterado a rota /salvarperguntas que captura os dados enviados pelo formulário, incluindo comando para salvar na tabela perguntas"
 
 
 

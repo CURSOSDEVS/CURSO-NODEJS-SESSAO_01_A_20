@@ -18,4 +18,5 @@ Pergunta.sync({force:false}).then(()=>{
     console.log('Tabela pergunta criada com sucesso')
 });
 
-
+//exportando o modulo para quem for utilizar.
+module.exports = Pergunta;
