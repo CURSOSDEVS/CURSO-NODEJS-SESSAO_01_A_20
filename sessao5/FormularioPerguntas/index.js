@@ -48,7 +48,9 @@ app.get('/',(req,res)=>{
     //carregando na variavel perguntas o conteúdo da tabela
     //.then(perguntas=>{console.log(perguntas)}) será listado no console os dados do banco de dados
     //{raw:true} exibe somente os dados cadastrados no bd e nada mais.
-    Pergunta.findAll({raw:true}).then(perguntas =>{
+    Pergunta.findAll({raw:true, order:[
+        ['id','DESC'] //ASC = Crescente DESC = Decrescente
+        ]}).then(perguntas =>{
         //envia para a página index a variavel perguntas
         //que será tratada na index.jes
         res.render('index',{
