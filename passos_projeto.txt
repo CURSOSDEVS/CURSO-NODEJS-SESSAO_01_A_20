@@ -60,12 +60,36 @@
    não mostrando outras informações do banco.
   O comando '.then(perguntas =>{ res.render('index',{ perguntas: perguntas});' 
   irá enviar a variavel 'perguntas' com todos os dados do banco para a página index.
--
+- Para ordernar a lista, basta alterar o atributo '.findAll' incluindo o atributo order conforme comandos 
+  '.findAll({raw:true, order:['id','DESC']})' que terá o campo que será ordenado e o tipo de ordenação (ASC ou DESC)
 
-	
+- Para encontrar um elemento do banco de dados utilizamos o método '.findOne({ where: {id: id}})' do model.
+  Onde passamos qual o parâmetro que está sendo passado pela url.
+  ex:  //rota que irá direcionar para a pagina da pergunta selecionada pelo usuário
+ app.get("/pergunta/:id",(req, res)=>{
+    //recebe o parâmetro id passado pelo usuário
+    var id = req.params.id;
+    //findOne metodo do sequelize que busca um dado
+    Pergunta.findOne({
+        where: {id: id}
+        //.then é uma função que é retornada após a pergunta
+    }).then(pergunta => {
+        if(pergunta != undefined){
+            //redirediona para a pagina da perguna
+            res.render("pergunta",{
+                pergunta : pergunta
+            });
+        }else{
+            //pergunta não foi encontrada redireciona para a pagina principal
+            res.redirect("/");
+        }
+    });
+});
 
 
-- "Alterando a rota '/' para exibir o conteúdo da tabela perguntas, alterado o index.ejs criando um forEach que recebe os dados enviados pela rota"
+
+
+- "Criando rota para a pagina 'pergunta' que irá mostrar a pergunta selecionda, essa rota possui o metodo .findOne que localiza no banco de dados um registro especifico"
 
 
 

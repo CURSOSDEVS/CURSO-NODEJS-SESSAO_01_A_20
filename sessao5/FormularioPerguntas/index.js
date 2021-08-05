@@ -76,6 +76,27 @@ app.post('/salvarpergunta',(req,res)=>{
         }).then(()=> {res.redirect('/')});
 });
 
+//rota que irá direcionar para a pagina da pergunta selecionada pelo usuário
+app.get("/pergunta/:id",(req, res)=>{
+    //recebe o parâmetro id passado pelo usuário
+    var id = req.params.id;
+    //findOne metodo do sequelize que busca um dado
+    Pergunta.findOne({
+        where: {id: id}
+        //.then é uma função que é retornada após a pergunta
+    }).then(pergunta => {
+        if(pergunta != undefined){
+            //redirediona para a pagina da perguna
+            res.render("pergunta",{
+                pergunta : pergunta
+            });
+        }else{
+            //pergunta não foi encontrada redireciona para a pagina principal
+            res.redirect("/");
+        }
+    });
+});
+
 //rodando a aplicação
 app.listen(8080,()=>{
     console.log("App rodando");
