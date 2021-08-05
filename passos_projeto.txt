@@ -53,10 +53,19 @@
    O Comando .then() irá realizar uma ação quando a pergunta for salva no banco de dados, neste caso o usuário será 
    redirecionado para rota(pagina) principal.
 
+- Para listar as perguntas da tabela no banco de dados, na rota principal '/', adicionamos os comandos
+  'Pergunta.findAll({raw:true}).then(perguntas =>{ res.render('index',{ perguntas: perguntas}); 
+   onde 'Pergunta' é o model que foi importado anteriormente, . 'findAll({raw:true})' corresponde lista 
+   todos os registros da tabela, '{raw:true}' significa  que será mostrado somente os dados cadastrados,
+   não mostrando outras informações do banco.
+  O comando '.then(perguntas =>{ res.render('index',{ perguntas: perguntas});' 
+  irá enviar a variavel 'perguntas' com todos os dados do banco para a página index.
+-
+
 	
 
 
-- "Alterado a rota /salvarperguntas que captura os dados enviados pelo formulário, incluindo comando para salvar na tabela perguntas"
+- "Alterando a rota '/' para exibir o conteúdo da tabela perguntas, alterado o index.ejs criando um forEach que recebe os dados enviados pela rota"
 
 
 

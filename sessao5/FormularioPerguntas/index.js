@@ -44,7 +44,18 @@ app.get('/perguntar', (req, res)=>{
 
 //rota da pagina principal
 app.get('/',(req,res)=>{
-    res.render('index');
+    //localizando todos os registros do model Pergunta e
+    //carregando na variavel perguntas o conteúdo da tabela
+    //.then(perguntas=>{console.log(perguntas)}) será listado no console os dados do banco de dados
+    //{raw:true} exibe somente os dados cadastrados no bd e nada mais.
+    Pergunta.findAll({raw:true}).then(perguntas =>{
+        //envia para a página index a variavel perguntas
+        //que será tratada na index.jes
+        res.render('index',{
+            perguntas: perguntas
+        });    
+    });
+    
 });
 
 //rota que irá receber os dados do formuláro enviados 
