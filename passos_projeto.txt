@@ -89,7 +89,7 @@
 
 
 
-- "Criando rota para a pagina 'pergunta' que irá mostrar a pergunta selecionda, essa rota possui o metodo .findOne que localiza no banco de dados um registro especifico"
+- "Criando model para as respostas, importando o model resposta no index.js"
 
 
 

@@ -21,6 +21,8 @@ connection
 //importando o model Pergunta para criar a tabela pergunta
 //e trabalhar com os dados da tabela, inserindo, alterando, apagando etc.
 const Pergunta = require('./database/Perguntas');
+//importando o model Resposta para criar a tabela de respostas
+const Resposta = require('./database/Respostas');
 
 //***********EJS**********************/
 //estamos setando o ejs para trabalhar no express
