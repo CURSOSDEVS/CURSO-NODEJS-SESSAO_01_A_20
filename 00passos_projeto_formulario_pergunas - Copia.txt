@@ -75,10 +75,15 @@
         //.then é uma função que é retornada após a pergunta
     }).then(pergunta => {
         if(pergunta != undefined){
-            //redirediona para a pagina da perguna
-            res.render("pergunta",{
-                pergunta : pergunta
-            });
+	    Respostas.findAll({raw: true, 
+		order: [['createdAt', 'DESC']],
+		where: {perguntaId: pergunta.id}).then( respostas =>{
+		//redirediona para a pagina da perguna
+		res.render("pergunta",{
+			pergunta: pergunta,
+			respostas: respostas});
+	     });
+		
         }else{
             //pergunta não foi encontrada redireciona para a pagina principal
             res.redirect("/");
@@ -86,7 +91,9 @@
     });
 });
 
-"Finalizado primeiro projeto- formulario de perguntas - Alterando a pagina pergunta.ejs, construindo cards que irão receber as respostas da pergunta selecionada. Foi incluido na rota /perguntar/:id, o método find.all() para localizar todas as respostas de uma pergunta e envia-las para a página pergunta.ejs."
+- Fazendo o Deploy da aplicação utilizando a plataforma DigitalOcean, que fornece servidores virtuais privados 'VPS'
+- Criar conta na DigitalOcean
+""
 
 
 

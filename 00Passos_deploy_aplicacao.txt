@@ -1,0 +1,139 @@
+- Fazendo o Deploy da aplicação utilizando a plataforma DigitalOcean, que fornece servidores virtuais privados 'VPS'
+
+- Criar conta na DigitalOcean
+- Selecionar a cpu de menor valor/hora ou verificar a necessidade da aplicação.
+- Selecionar o local mais proximo do brasil, por exemplo Nova york
+- Escolher a forma de autenticação SSH Keys
+- Instalar o PuTTY para gerar uma SHH Keys
+- Abrir o programa PuTTygen
+- Clicar em generate e após gerado copiar o código
+- Clicar em new SHH keys na DigitalOcean
+- Colar o código gerado
+- Informar um nome para SHH Key - ex: chave1
+- Clicar em Add SHH Key para gerar a chave
+- Essa chave gerada é a chave publica
+- Salvar a chave publica e a chave privada em um local no hd
+- Sempre que for abrir o servidor deve-se utilizar a chave privada
+
+- Dar um nome ao servidor ex: guiaPerguntas
+- Clicar em create Droplet para criar o servidor
+- Clicar em Droplets no menu lateral para ver o servidor criado e copiar o IP do servidor.
+- Abrir o PuTTy ir em connection, SSH, Auth, clicar no botão Browser e selecionar o arquivo da chave privada.
+- Após carregar o caminho da chave privada, clicar em Session e copiar o IP no campo Host Name(or IP address)
+- No campo Saved Sessions informar um nome e clicar em salvar para utilizar essas informações no futuro.
+- Clicar em open
+- Informar qual usuário será utilizado, neste caso será o 'root'
+- Agora no servidor vamos utilizar comandos linux
+- comando 'clear' limpa a tela
+- Antes de iniciar a instalação do app na VPS
+- Entrar na página do NodeJs e clicar em Other Downloads
+- Ir na opção 'Installing Node.js via package manager'
+- Escolher o sistema operacional 'Debian and Ubuntu'
+- Clicar em 'Node.js binary distributions'
+- Vai abrir uma página no github com os comandos para instalação no node.js
+- Copiar o comando 'curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -' da versão LTS
+- Colar dentro do prompt da tela do servidor e apertar enter para baixar o node no linux.
+- Limpar a tela com 'clear'
+- Instalar o node com o comando 'sudo apt-get install -y nodejs'
+- Digitar 'node -v' para verificar se o node foi instalado corretamente
+
+- Instalar o MySQL
+- Digitar 'sudo apt install mysql-server'
+- Digitar Y
+- Digitar o comando 'mysql_secure_installation'
+- Informar N 
+- Digitar uma senha ex: 123456
+- Informar Y para remover qualquer usuário que esteja acessando o mysql
+- Informar N para não desativar o login remoto
+- Informar Y para remover o banco de dados de teste do mysql
+- Informar Y para recarregar as modificações
+- Limpar a tela
+- Digitar 'mysql' para testar a instalação
+
+- COMO APRESENTOU ERRO SE FOR NECESSÁRIO APAGAR TOTALMENTE O MYSQL
+- Comando para apagar totalmente o mysql
+- Digite 'sudo apt-get remove --purge mysql*'
+- Digite os comandos abaixo para terminar a limpeza:
+ 'dpkg -l | grep mysql'
+ 'sudo rm -rf /etc/mysql /var/lib/mysql'
+ 'sudo apt-get autoremove'
+ 'sudo apt-get autoclean'
+- Reinstalar o mysql
+- 
+- 
+
+- Vamos subir os dados para o servidor
+- Vamos fazer uma transferência de dados através do sftp com o FileZilla
+- Entrar no site do FileZillar e baixar o FileZilla Client gratuita
+- Após instalar, abrir o filezilla, clicar em Arquivo, Gerenciador de sites
+- Criar um novo site e informar um nome 'GuiaPerguntas'
+- Definir o protocolo sftp
+- Informar o IP do servidor em Host
+- Em tipo de logon selecionar arquivo de chave
+- Informar o usuário 'root'
+- Selecionar o arquivo da chave privada
+- Clicar em conectar
+- Será mostrado as pastas que existem no servidor
+- Para testar pode-se criar uma pasta na área do servidor e digitar 'ls' no prompt do PuTTy para ver se a pasta foi criada
+- Dar duplo clique na pasta criar no filezilla para abrir a pasta
+- Abrir a pasta do projeto no computador e copiar todas as pastas da aplicação com excessão da pasta node_modules
+- Pois a pasta node_modules possuem as bibliotecas do sistema operacional local e pode dar conflito no servidor.
+- Depois de subir os arquivos do projeto, vamos baixar novamente as bibliotecas no servidor
+- Acessar a pasta GuiaPerguntas no prompt com 'cd GuiaPerguntas'
+- Digitar 'ls' para ver os arquivos dentro da poasta
+- Digitar 'npm install' para realizar a instalação das bibliotecas, essa instalação usa o packge.json
+
+- Configurar o banco de dados.
+- Digitar 'mysql'
+- Digitar CREATE DATABASE guiaperguntas;
+- Entrar na pasta 'database' com 'cd database' e digitar 'ls' para ver os arquivos
+- Abrir o arquivo 'database.js' com o editor de texto 'nano'
+- Digitar 'nano database.js'
+- Alterar a senha da conexão mysql para a senha cadastrada na instalação.
+- Voltar uma pasta com 'cd ../'
+- Digitar 'node index.js' para iniciar a aplicação
+
+- CASO APRESENTE ERRO 1698 NA APLICAÇÃO
+- Entre no mysql digite 'mysql -u root'
+- Digite 'ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456'
+- 'exit'
+- tente rodar a aplicação
+
+- CASO APRESENTE ERRO 1045 NA APLICAÇÃO
+- Para corrigir o erro do Mysql basta entrar no mysql
+- Digite 'mysql-u root' ou 'mysql'
+- Digite 'show databases;'
+- Digite 'use mysql';
+- 'show tables;'
+- 'desc user;'
+- Verificar se qual o campo armazena a senha,
+- No meu caso é 'authentication_string
+- Verificar quais senhas estão sendo utilizadas pelo usuário root;
+- 'select User,authentication_string,Host from user;'
+- Atualizar a senha do usuario root
+- 'update mysql.user set authentication_string=PASSWORD('123456') where User='root';'  obs:123456 é a senha cadastrada no inicio
+- Atualizar o mysql
+- 'flush privileges;'
+- 'quit';
+- Para entrar no mysql agora é necessário utilizar o comando 'mysql -u root -p' e informar a senha
+
+3194-0330
+
+ 
+
+
+ pluginl_native_password        | char(64)                          | NO   |     | mysq                |       |
+| authentication_string  	| text  			    | yes   |    | NULL 
+
+https://www.youtube.com/watch?v=MJmEHUa5K38	   
+
+
+
+
+
+
+
+
+
+
+""
