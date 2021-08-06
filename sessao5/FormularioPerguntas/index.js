@@ -21,8 +21,6 @@ connection
 //importando o model Pergunta para criar a tabela pergunta
 //e trabalhar com os dados da tabela, inserindo, alterando, apagando etc.
 const Pergunta = require('./database/Perguntas');
-//importando o model Resposta para criar a tabela de respostas
-const Resposta = require('./database/Respostas');
 
 //***********EJS**********************/
 //estamos setando o ejs para trabalhar no express
@@ -44,6 +42,8 @@ app.get('/perguntar', (req, res)=>{
     res.render('perguntar');
 });
 
+
+
 //rota da pagina principal
 app.get('/',(req,res)=>{
     //localizando todos os registros do model Pergunta e
@@ -62,6 +62,8 @@ app.get('/',(req,res)=>{
     
 });
 
+
+
 //rota que irá receber os dados do formuláro enviados 
 //via post e irá salvar no banco de dados
 app.post('/salvarpergunta',(req,res)=>{
@@ -78,6 +80,8 @@ app.post('/salvarpergunta',(req,res)=>{
         }).then(()=> {res.redirect('/')});
 });
 
+
+
 //rota que irá direcionar para a pagina da pergunta selecionada pelo usuário
 app.get("/pergunta/:id",(req, res)=>{
     //recebe o parâmetro id passado pelo usuário
@@ -88,16 +92,44 @@ app.get("/pergunta/:id",(req, res)=>{
         //.then é uma função que é retornada após a pergunta
     }).then(pergunta => {
         if(pergunta != undefined){
+            //busca no banco de dados para buscar todas as respostas de uma pergunta
+            Resposta.findAll({raw: true, 
+                order: [['createdAt','DESC']], 
+                where: {perguntaId: pergunta.id} 
+            }).then(respostas =>{
+                    res.render("pergunta",{
+                        pergunta : pergunta,
+                        respostas : respostas
+                    });
+            })
             //redirediona para a pagina da perguna
-            res.render("pergunta",{
-                pergunta : pergunta
-            });
+            
         }else{
             //pergunta não foi encontrada redireciona para a pagina principal
             res.redirect("/");
         }
     });
 });
+
+
+
+/******rota para receber a resposta e salvar no banco de dados**/
+//importando o model Resposta para criar a tabela de respostas
+const Resposta = require('./database/Respostas');
+app.post('/responder',(req,res)=>{
+    var corpo = req.body.corpo; //corpo é o name de um campo no form da página pergunta.ejs
+    var perguntaid = req.body.perguntaid;//perguntaid tambem é um name do form da página pergunta.ejs
+    //salvando a resposta na tabela respostas
+    Resposta.create({
+        corpo: corpo,
+        perguntaId: perguntaid
+    }).then( () => {
+        res.redirect('/pergunta/'+perguntaid);
+    });
+
+});
+
+/************************************** */
 
 //rodando a aplicação
 app.listen(8080,()=>{

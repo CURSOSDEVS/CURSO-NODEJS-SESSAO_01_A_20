@@ -86,10 +86,14 @@
     });
 });
 
+"Finalizado primeiro projeto- formulario de perguntas - Alterando a pagina pergunta.ejs, construindo cards que irão receber as respostas da pergunta selecionada. Foi incluido na rota /perguntar/:id, o método find.all() para localizar todas as respostas de uma pergunta e envia-las para a página pergunta.ejs."
 
 
 
-- "Criando model para as respostas, importando o model resposta no index.js"
+
+
+
+- ""
 
 
 
