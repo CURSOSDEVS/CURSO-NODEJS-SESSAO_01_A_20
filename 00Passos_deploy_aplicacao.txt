@@ -121,15 +121,17 @@ CONFIGURAÇÃO DO BANCO DE DADOS PARA UMA URL MAIS AMIGAVEL
 - Editar a porta que está sendo utilizada no index.js
 - Digitar 'nano index.js' alterar a porta para 80;
 
-ALTERANDO A FORMA DE INICIAR O NODE_JS 
+ALTERANDO A FORMA DE RODAR A APLICAÇÃO COM O NODE_JS EM BACKGROUND NO SERVIDOR
 - Vamos ter que colocar nossa aplicação Node rodando em background no servidor
 - Vamos instalar uma biblioteca do node chamada PM2node que roda o node em background no servidor na VPS.
 - Digitar no promp do PuTTy. 'sudo npm install -g pm2';
 - Após a instalação do pm2, navegar até a pasta da aplicação.
 - Rodar a aplicação com o pm2 
+- Digitar 'pm2 start index.js'
+- Agora pode-se fechar o PuTTy que o servidor não cai
 
 
-"Realizado cadastro e configuração no DigitalOcean, Realizado instalação do PuTTy, configuração do banco de dados retirando erros."
+"Realizado instalação da biblioteca pm2 do node para rodar a aplicação em background no servidor."
 
 
 
