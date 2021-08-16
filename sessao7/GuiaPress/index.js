@@ -6,13 +6,16 @@ const app = express();
 //importando as rotas dos controllers
 const categoriesController = require('./categories/CategoriesController');
 const articlesController = require('./articles/ArticlesController');
+const usersController = require('./users/UsersController');
 
 /**BANCO DE DADOS *************************/
 //importando a conexão com o banco de dados
 const connection = require('./database/database');
+
 //importando os models
 const Category = require('./categories/Category');
 const Article = require('./articles/Article');
+const User = require('./users/User');
 
 /***************************************** */
 
@@ -25,10 +28,12 @@ connection
         console.log(error);
     });
 /***************************************** */
+
 //dizer para a aplicação utilizar o controller que foi importado
 //e poder acessar as rotas que estão definidas no controller
 app.use('/',categoriesController);
 app.use('/',articlesController);
+app.use('/',usersController);
 
 /***************************************** */
 //configurando a view engine
