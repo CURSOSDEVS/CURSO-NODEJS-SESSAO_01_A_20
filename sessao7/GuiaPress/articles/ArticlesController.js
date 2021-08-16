@@ -117,7 +117,7 @@ router.post('/articles/update',(req,res)=>{
     });
 });
 
-//logica para a paginaca
+//logica para a paginaca dos artigos
 router.get('/articles/page/:num',(req, res)=>{
     /*logica da paginacao
       offset =  pag *
@@ -127,23 +127,67 @@ router.get('/articles/page/:num',(req, res)=>{
        3  =  8 - 11
         */
     var page = req.params.num;
+
+    //limit será o número de elementos que serão visualizados
+    //na página    
     var limit = 4;
+
+    //ofsset é o primeiro elemento que será mostrado na tela
     var offset = 0;
+
     //verificar se a página é valida se não for o offset é 0
     if((isNaN(page)) || (page === 1)){
         offset = 0;
     }else{
         offset = parseInt(page) * limit;
     }
-    //retornando todos os elementos e a quantidade de elementos da tabela
+
+    //retornando todos os elementos e a quantidade de 
+    //elementos da tabela. A quantidade total é o 'count'
+    //e os elementos são as 'rows'.
     Article.findAndCountAll({
+
          //paramento limit será o limite de elementos por página
          limit: limit,
+
          //parametro offset retorna dados apártir de uma posição
          offset: offset
+
     }).then(articles=>{
+
+        
+        //next irá receber a resposta se tem outra página ou não
+        var next;
+
+        //verifica se existe outra página, ou seja
+        //se o somatorio de offset + aquantidade de itens
+        //por página form maior que a quantidade total de itens
+        //'articles.count' então não terá outra página
+        if(offset + limit >= articles.count){
+            next  = false;
+        }else{
+            next = true;
+        }
+
+        //resultado final da páginação
+        var results = {
+            next:next,
+            articles : articles
+        }
+
+        //iremos pegar as categorias e enviar para a homenavbar da
+        //página 'page.ejs' dos articles
+        //Na página 'page.ejs' para pegarmos os elementos 
+        //teremos que utilizar a propriedade rows
+        Category.findAll().then(categories =>{
+            res.render('admin/articles/page.ejs',{
+                results: results,
+                categories: categories
+            });
+        });
+
         //retorna os artigos no formato JSON
-        res.json(articles);
+        //res.json(results);
     });
 
 });

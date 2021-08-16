@@ -1,0 +1,17 @@
+<%- include ('../../partials/header.ejs'); %> 
+<%- include ('../../partials/homenavbar.ejs');%>
+<div class="container"> 
+    <!--Aqui foi utilizado a propriedade rows pois no controller
+    utilizamos o método findAllCount() que retorna o número total
+de elementos e as rows. Alem disso foi passado os articles e o
+count para a variável results--> 
+  <% results.articles.rows.forEach(article=>{ %>
+  <div style="margin-top: 10px" class="card">
+    <div class="card-header"><%=article.title%></div>
+    <div class="card-body">
+      <a class="btn btn-success" href="/<%= article.slug%>">Ler Artigo</a>
+    </div>
+  </div>
+  <% }); %>
+</div>
+<%- include ('../../partials/footer.ejs');%>
