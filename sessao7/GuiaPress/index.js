@@ -42,7 +42,9 @@ app.use(express.static('public'));
 //cadastrados
 app.get('/',(req,res)=>{
     Article.findAll({        
-        order:[['id','DESC']]
+        order:[['id','DESC']],
+        //limitamos a exibição em quatro elementos na página
+        limit: 4
         }).then(articles=>{
             if(articles != undefined){
                 /*localizando as categorias que serão passadas

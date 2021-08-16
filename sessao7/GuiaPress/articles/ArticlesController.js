@@ -139,7 +139,7 @@ router.get('/articles/page/:num',(req, res)=>{
     if((isNaN(page)) || (page === 1)){
         offset = 0;
     }else{
-        offset = parseInt(page) * limit;
+        offset = (parseInt(page) - 1) * limit;
     }
 
     //retornando todos os elementos e a quantidade de 
@@ -151,7 +151,11 @@ router.get('/articles/page/:num',(req, res)=>{
          limit: limit,
 
          //parametro offset retorna dados apártir de uma posição
-         offset: offset
+         offset: offset,
+
+         //realizando a ordenacao dos artigos pelo id
+         order: [
+             ['id','DESC']]
 
     }).then(articles=>{
 
@@ -171,7 +175,13 @@ router.get('/articles/page/:num',(req, res)=>{
 
         //resultado final da páginação
         var results = {
-            next:next,
+            //mostra qual a página atual
+            page: parseInt(page),
+
+            //mostra se terá outra página para exibir
+            next: next,
+
+            //carrega todos os artigos da página que será exibida
             articles : articles
         }
 
