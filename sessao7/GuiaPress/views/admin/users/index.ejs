@@ -1,1 +1,37 @@
-<h1>Página dos usuarios</h1>
+<%- include('../../partials/header.ejs');%>
+<%- include('../../partials/navbar.ejs');%>
+<div style="margin-top: 10px; padding: 5px;" class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2 style="float: left;">Lista de usuários</h2>
+            <a style="float: right;" class="btn btn-success" href="../../admin/users/create">Cadastrar Usuário</a>
+        </div>
+        <div class="card-body">            
+            <table class="table table-bordered">
+                <thead>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody>
+                    <% if(users != undefined){%>
+                        <% users.forEach(user =>{ %> 
+                            <tr>
+                                <td><%= user.mail %></td>
+                                <td><%= user.password%></td>
+                                <td style="text-align: center;">
+                                    <a href="/admin/users/edit/<%= user.id%>" class="btn btn-warning" >Editar</a>
+                                    <form method="POST" action="/user/delete" style="display: inline;">
+                                        <button class="btn btn-danger" >Excluir</button>
+                                        <input type="hidden" value="<%= user.id%>" name="userId">
+                                    </form>                                    
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <%};%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<%- include('../../partials/footer.ejs');%>

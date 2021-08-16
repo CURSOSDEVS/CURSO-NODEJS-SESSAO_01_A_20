@@ -1,6 +1,7 @@
-- Foi criado logica para a paginacao dos articles no controller ArticlesController.
-Criado a página 'page.ejs' que irá receber os artigos e mostrálos com paginacao.
+- Foi criado logica para a paginacao dos articles no controller ArticlesController.Criado a página 'page.ejs' que irá receber os artigos e mostrálos com paginacao.
 - Alterado o controller index.js incluindo um limite para exibição dos artigos na página, incluido tambem na página principal index.ejs um link que irá carregar a página page.ejs com os articles das próximas páginas. Criado paginação na página index.ejs e page.ejs
+- Criado o controller UserController e o model User para implantação do login.Copiado o conteudo do model ArticlesController para o UserController e realizado as devidas alterações para o conteúdo principal. Copiado tambem o conteúdo do model Articles para o model Users e realizado as alterações para criação da tabela users.Inserido no controller principal index.js referências do UsersController.
+
 
 
 
