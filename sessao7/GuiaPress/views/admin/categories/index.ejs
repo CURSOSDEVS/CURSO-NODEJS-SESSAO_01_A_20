@@ -1,0 +1,51 @@
+<%- include ('../../../views/partials/header.ejs'); %>
+<%- include ('../../../views/partials/navbar.ejs'); %>
+    <div class="container">
+        
+        
+        <div style="padding: 10px; ">            
+            <h2 style="float: left;">Categorias</h2>
+            <a style="float: right; " class="btn btn-success" href="../../admin/categories/new" >Criar nova Categoria</a>            
+        </div>
+        
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach(category=>{ %>
+                    <tr>
+                        <td><%=category.id %></td>
+                        <td><%=category.title %></td>
+                        <td><%=category.slug %></td>
+                        <td style="text-align: center;">                            
+                            <a class="btn btn-warning" href="/admin/categories/edit/<%=category.id%>">Editar</a>
+                            
+                            <form  method="POST" action="/categories/delete" style="display: inline;" onsubmit="confirmarDelecao(event, this)">  
+                                <input type="hidden" name="id" value="<%=category.id%>">                             
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <%} ) %>
+            </tbody>
+        </table>      
+    </div>
+<%- include ('../../../views/partials/footer.ejs'); %>
+<!--criando um script para confirmar a exclusão da categoria-->
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        //verifica se o usuário quer deletar
+        var decision = confirm('Você quer deletar a categoria?');
+        if(decision){
+           form.submit();
+        };
+    };
+</script>

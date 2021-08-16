@@ -1,0 +1,51 @@
+<%- include ('../../../views/partials/header.ejs'); %>
+<%- include ('../../../views/partials/navbar.ejs'); %>
+    <div class="container">
+        
+        <div style=" padding: 10px;">
+            <h2 style="float: left;">Artigos</h2>
+            <a style="float: right;" class="btn btn-success" href="../../admin/articles/new" >Criar novo artigo</a>
+        </div>
+ 
+        <table class="table table-bordered">
+            <thead>
+                <tr class="head_table">
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Slug</th>                    
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach(article=>{ %>
+                    <tr>
+                        <td><%= article.id %></td>
+                        <td><%= article.title %></td>
+                        <td><%= article.slug %></td>                        
+                        <td><%= article.category.title %></td>
+                        <td style="text-align: center;">                
+                            <a class="btn btn-warning" href="../../admin/articles/edit/<%=article.id%>"">Editar</a>
+                            
+                            <form  method="POST" action="/article/delete" style="display: inline;" onsubmit="confirmarDelecao(event, this)">  
+                                <input type="hidden" name="id" value="<%=article.id%>">                             
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <%} ) %>
+            </tbody>
+        </table>      
+    </div>
+<%- include ('../../../views/partials/footer.ejs'); %>
+<!--criando um script para confirmar a exclusão da categoria-->
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        //verifica se o usuário quer deletar
+        var decision = confirm('Você quer deletar o artigo?');
+        if(decision){
+           form.submit();
+        };
+    };
+</script>
