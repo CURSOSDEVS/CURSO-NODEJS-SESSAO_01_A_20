@@ -14,14 +14,14 @@
                     <th>Ações</th>
                 </thead>
                 <tbody>
-                    <% if(users != undefined){%>
+                    <% if(users != undefined){ %>
                         <% users.forEach(user =>{ %> 
                             <tr>
                                 <td><%= user.mail %></td>
                                 <td><%= user.password%></td>
                                 <td style="text-align: center;">
                                     <a href="/admin/users/edit/<%= user.id%>" class="btn btn-warning" >Editar</a>
-                                    <form method="POST" action="/user/delete" style="display: inline;">
+                                    <form method="POST" action="/user/delete" style="display: inline;" onsubmit="confirmarExclusao(event, this)">
                                         <button class="btn btn-danger" >Excluir</button>
                                         <input type="hidden" value="<%= user.id%>" name="userId">
                                     </form>                                    
@@ -35,3 +35,14 @@
     </div>
 </div>
 <%- include('../../partials/footer.ejs');%>
+<!--criando um script para confirmar a exclusão da categoria-->
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        //verifica se o usuário quer deletar
+        var decision = confirm('Você quer deletar a categoria?');
+        if(decision){
+           form.submit();
+        };
+    };
+</script>

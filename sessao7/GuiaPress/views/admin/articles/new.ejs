@@ -8,7 +8,7 @@
                 <h2>Novo Artigo</h2>
             </div>
             <div class="card-body"><!---->
-                <form name="form1" method="POST" action="/articles/save">
+                <form name="form1" method="POST" action="/articles/save" onsubmit="validarCampos()">
                     <label for="tile">Título:</label>
                     <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo">                    
                     <label for="article">Conteúdo:</label>

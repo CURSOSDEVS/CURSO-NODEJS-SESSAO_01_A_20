@@ -8,6 +8,11 @@ const router = express.Router();
 //importando o model de user
 const User = require('./User');
 
+//importando o bcrypt para o controller para utilizar
+//hash na senha do usuário
+const bcrypt = require('bcryptjs');
+
+
 //rota para abrir a página com a lista de usuário
 router.get('/admin/users',(req,res)=>{
     //consultandos os registros da tabela de usuários
@@ -34,20 +39,34 @@ router.post('/users/save',(req, res)=>{
 
     var mail = req.body.email;
     var password = req.body.password;
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
 
+    //utilizado para teste antes de popular no banco de dados
+    //res.json({mail, hash});
+    
     User.create({
         mail: mail,
-        password: password
+        password: hash
     }).then(()=>{
         res.redirect('/admin/users');
     }).catch(err =>{
         res.send("Erro desconhecido. "+ err);
     });
-
+    
 });
 
 //rota para excluir um usuário
-
+router.post('/user/delete',(req, res)=>{
+    var userId = req.body.userId;
+    User.destroy({
+        where:{ id: userId }
+    }).then(()=>{
+        res.redirect('/admin/users');
+    }).catch(err=>{
+        res.send("Erro desconhecido. "+ err);
+    });
+});
 
 
 

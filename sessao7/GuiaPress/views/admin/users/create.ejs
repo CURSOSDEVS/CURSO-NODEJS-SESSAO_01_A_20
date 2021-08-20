@@ -6,7 +6,7 @@ include('../../partials/navbar.ejs');%>
       <h2>Cadastro de usuários</h2>
     </div>
     <div class="card-body">
-      <form name="form1" method="POST" action="/users/save">
+      <form name="form1" method="POST" action="/users/save" onsubmit="validarCampos()">
         <input
           name="email"
           type="email"
@@ -20,7 +20,7 @@ include('../../partials/navbar.ejs');%>
           placeholder="***************"
         />
 
-        <button class="form-control btn btn-success mt-3">Cadastrar</button>
+        <button type="submit" class="btn btn-block btn-success mt-3">Cadastrar</button>
       </form>
     </div>
   </div>
@@ -31,13 +31,13 @@ include('../../partials/navbar.ejs');%>
     var email = form1.email.value;
     var password = form1.password.value;
 
-    if (email == " ") {
+    if (email == "") {
       alert("Digite o email do usuario");
       form1.email.focus();
       return false;
     }
 
-    if (password == " ") {
+    if (password == "") {
       alert("Digite a senha do usuario");
       form1.password.focus();
       return false;
