@@ -44,15 +44,24 @@ router.post('/users/save',(req, res)=>{
 
     //utilizado para teste antes de popular no banco de dados
     //res.json({mail, hash});
-    
-    User.create({
-        mail: mail,
-        password: hash
-    }).then(()=>{
-        res.redirect('/admin/users');
-    }).catch(err =>{
-        res.send("Erro desconhecido. "+ err);
+
+    //verifica se o ja existe o email cadastrado 
+    User.findOne({where: {mail: mail}}).then(user=>{
+        if(user == undefined){
+            User.create({
+                mail: mail,
+                password: hash
+            }).then(()=>{
+                res.redirect('/');
+            }).catch(err =>{
+                res.send("Erro desconhecido. "+ err);
+            });
+        }else{
+            res.redirect('/admin/users/create');
+        }
     });
+    
+    
     
 });
 
