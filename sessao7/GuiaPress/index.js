@@ -2,6 +2,17 @@
 const express = require('express');
 //criando instância
 const app = express();
+//importando a biblioteca de sessoes
+const session = require('express-session');
+//configurando o gerenciamento de sessões
+app.use(session({
+    //texto utilizado para aumetar a segurança das sessões
+    secret:"qualquerPalavra",
+    //cookie é uma referencia para sessão no servidor
+    //pode-se setar o tempo de uma sessão pela 
+    //propriedade maxAge que é em milisegundos ou seja cada segundo e 1000 milisegundo
+    cookie: {maxAge: 30000}
+}));
 
 //importando as rotas dos controllers
 const categoriesController = require('./categories/CategoriesController');
