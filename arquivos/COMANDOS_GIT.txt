@@ -1,0 +1,46 @@
+- Na página do github criar um repositório;
+
+DENTRO DA PASTA QUE SERÁ ENVIADA PARA O GITHUB
+- git init Inicia um novo repositório local na pasta do seu projeto
+- git remote add origin https://github.com/acenelio/meuprojeto.git
+  ATENÇÃO: troque pelo caminho do seu repositório do Githubgi
+  Associa seu repositório local ao repositório remoto, com o apelido de "origin"
+- git pull origin master
+  ATENÇÃO: este comando só é necessário se você criou o .gitignore pelo Github
+  Atualiza seu repositório local em relação ao repositório remoto
+- git status Verifica arquivos
+- git add . Adiciona todos arquivos ao stage
+- git commit -m "Projeto criado" Salva uma nova versão do projeto
+- git push -u origin master Nota: nas próximas vezes basta fazer: git push
+
+- recupera o repositório em caso de confito
+  git pull origin master
+
+- concerte os arquivos e realize novamente
+  git add --all e depois committ , push 
+
+ALTERANDO MENSAGEM DE UM COMMIT
+- git log -p
+- git commit --amend : vai abrir o editor de texto onde é possivel alterar
+  a mensagem do commit
+
+TRANSFERINDO O REPOSITÓRIO do BITBUCKER PARA O GITHUB
+$ git remote rename origin bitbucket
+$ git remote add origin <URL do repositório criado>
+$ git push origin master
+Pronto! Todo o repositório do BitBucket vai ser copiado para o GitHub, 
+inclusive mantendo o histórico de commits. 
+
+Se desejar remover totalmente o projeto do BitBucket, execute também:
+$ git remote rm bitbucket
+
+Incluir arquivos no .gitignore
+echo nomedoarquivo >> .gitignore
+echo nomedapasta/ >> .gitignore
+para ecluir basta abrir o .gitignore e apagar os arquivos, da próxima vez ele já será comitado
+
+Apagar cache para o .gitignore funcionar
+git rm -r --cached .
+
+
+  

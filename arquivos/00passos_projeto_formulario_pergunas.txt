@@ -1,0 +1,131 @@
+- criar pasta do projeto
+- criar a pasta views dentro da pasta do projeto, que será utilizada com o EJS, onde serão criados os arquivos HTML com extensão .ejs
+- Dentro da pasta do projeto, inicializar o npm usando o comando 'npm init'
+- Dar o comando 'npm install express --save' dentro da pasta do projeto para realizar a instalação
+- Dar o comando 'npm install ejs --save' para instalar o gerenciador de template EJS
+- instalar o nodemon para reinicialização do servidor - npm install nodemon -g
+
+- criar o arquivo inicial index.js dentro da pasta express
+- importar o Express para dentro do arquivo inicial 'const express = require("express");
+- instanciar o express no aplicativo 'const app = express()';
+- setar o ejs para rodar no express ex: app.set('view engine', 'ejs');
+- rodar o app utilizando : nodemon 'index.js'
+- criar pasta 'public' onde serão adicionados os arquivos estáticos utilizados no aplicativo
+- configurando o app para o express usar aquivos estaticos ex: app.use(express.static('public');
+- dentro da pasta 'public' crie as outras pastas ex: css, img, js
+- baixar o bootstrap e inserir as referências nas páginas
+- criar os partials do header, navbar e footer para as páginas, inserir os includes nas paginas.
+- utilizar o express.urlencoded para capturar os dados enviados pelo formulário. Utilizar os comandos 'app.use(express.urlencoded({extended:false});'
+- utilizar o json para utilizar os dados.Utilizar o comando 'app.use(express.json());'
+- instalar o Mysql Server comunity
+- instalar o workebench do mysql
+- abrir a pasta do projeto e instalar a biblioteca 'sequelize', para conexão e manipular o banco de dados dentro 
+  do node, com o comando 'npm install --save sequelize .
+- para o sequelize trabalhar com o mysql é necessário instalar a biblioteca extra 'mysql2' com o comando 
+  'npm install --save mysql2
+- Criar uma pasta 'database' e dentro dela criar um arquivo database.js onde ficará a conexão com o sequelize
+- No arquvio 'database.js' utilizar o comando 'const Sequelize = require('sequelize') para carregar o sequealize
+- Criar a 'const connection = new Sequelize('nome_banco_dados','usuario(root)','senha usuario(root)',{ 
+                                             host: 'local da aplicacao(localhost)', 
+					     dialect: 'tipo de banco de dados(mysql)'});
+- Exportar a conexão com os comandos: 'module.exports = connection;
+- Ir no arquivo principal do projeto 'index.js' e carregar a conexão com o comando: 
+  'const connection = require('./database/database.js');'
+- Definir um model para criar as tabelas do banco de dados ex: 'Perguntas.js' dentro da pasta database
+- Importar o sequelize 'const Sequelize - require('selequelize');'
+- Iportar a conexão com o banco de dados - ' 'const connection = require('./database');
+- Criar o model utilizando os comandos e o json com os campos que irão compor a tabela e um json de opções que pode estar vazio:
+  'const Pergunta = connection.define('pergunta', {
+                                       tiulo:{ type: Sequelize.STRING, allowNull: false},
+				       descricao:{ type: Sequelize.TEXT, allowNull: false}
+					},{});
+- Criar comando para criar a atabela : 'Pergunta.sync({force:false}).then(()=>{console.log('tabela pergunta criada)});
+' este comando ira sincronizar o que está no model Pergunta.js 
+  com o banco de dados, o 'force' é para não forçar a criação da tabela(recriá-la)caso ela já exista no banco
+  e o '.then() é para verificar se a tabela foi criada.
+- Criar comando para exportar o modulo 'Perguntas' : 'module.exports = Pergunta;'
+- No arquivo index.js importar a constante 'Pergunta' que realizará a criação da tabela quando o index.js for executado.
+  com os comandos : 'const Pergunta = require('./database/Perguntas');'. A tabela será criada automaticamente.
+- Pegar os dados que estão sendo enviados pelo formulário 'Perguntas.ejs' e salvar no banco de dados.
+- Alterando a rota '/salvarpergunta' do arquivo index.js para salvar os dados que estão nas variáveis na tabela
+  no banco de dados. Com os comandos que irão salvar os dados na tabela:
+  'Pergunta.create({ titulo:titulo, descricao:descricao}).then(()=>{res.redirect('/ 	)' 
+   O Comando .then() irá realizar uma ação quando a pergunta for salva no banco de dados, neste caso o usuário será 
+   redirecionado para rota(pagina) principal.
+
+- Para listar as perguntas da tabela no banco de dados, na rota principal '/', adicionamos os comandos
+  'Pergunta.findAll({raw:true}).then(perguntas =>{ res.render('index',{ perguntas: perguntas}); 
+   onde 'Pergunta' é o model que foi importado anteriormente, . 'findAll({raw:true})' corresponde lista 
+   todos os registros da tabela, '{raw:true}' significa  que será mostrado somente os dados cadastrados,
+   não mostrando outras informações do banco.
+  O comando '.then(perguntas =>{ res.render('index',{ perguntas: perguntas});' 
+  irá enviar a variavel 'perguntas' com todos os dados do banco para a página index.
+- Para ordernar a lista, basta alterar o atributo '.findAll' incluindo o atributo order conforme comandos 
+  '.findAll({raw:true, order:['id','DESC']})' que terá o campo que será ordenado e o tipo de ordenação (ASC ou DESC)
+
+- Para encontrar um elemento do banco de dados utilizamos o método '.findOne({ where: {id: id}})' do model.
+  Onde passamos qual o parâmetro que está sendo passado pela url.
+  ex:  //rota que irá direcionar para a pagina da pergunta selecionada pelo usuário
+ app.get("/pergunta/:id",(req, res)=>{
+    //recebe o parâmetro id passado pelo usuário
+    var id = req.params.id;
+    //findOne metodo do sequelize que busca um dado
+    Pergunta.findOne({
+        where: {id: id}
+        //.then é uma função que é retornada após a pergunta
+    }).then(pergunta => {
+        if(pergunta != undefined){
+	    Respostas.findAll({raw: true, 
+		order: [['createdAt', 'DESC']],
+		where: {perguntaId: pergunta.id}).then( respostas =>{
+		//redirediona para a pagina da perguna
+		res.render("pergunta",{
+			pergunta: pergunta,
+			respostas: respostas});
+	     });
+		
+        }else{
+            //pergunta não foi encontrada redireciona para a pagina principal
+            res.redirect("/");
+        }
+    });
+});
+
+- Fazendo o Deploy da aplicação utilizando a plataforma DigitalOcean, que fornece servidores virtuais privados 'VPS'
+- Criar conta na DigitalOcean
+""
+
+
+
+
+
+
+- ""
+
+
+
+
+
+
+
+
+
+
+
+
+- Utilizar os comandos no prompt para abrir o Mysql - "mysql -h localhost -u root -p"
+   . Show Databases; (mostra os bancos de dados)
+   . Criar banco de dados ex: CREATE DATABASE sistemaDeCadastro; (criando o banco de dados)
+   . Selecionar o banco de dados ex: USE sistemaDeCadastro; (utilizar o banco de dados)
+   . Para criar tabelas ex:CREATE TABLE usuarios(nome VARCHAR(50), email VARCHAR(100), idade INT);
+   . Descrever a tabela ex: DESCRIBE usuarios;
+   . Inserindo dados na tabela ex: INSERT INTO usuarios(nome, email, idade) VALUES('Pedro','Pedro@com',33);
+   . Mostrando dados da tabela ex: SELECT * FROM usuarios;
+   . ex: select nome from usuarios where idade <= 35 and idade >= 18;
+   . Deletando dados da tabela ex: DELETE FROM usuarios WHERE nome = 'Joao';
+   . Atualizando dados da tabela ex: UPDATE usuarios SET nome = "Nome de Teste" WHERE nome = 'Maria';
+
+
+
+
+

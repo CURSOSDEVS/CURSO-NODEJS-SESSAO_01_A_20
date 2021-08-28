@@ -1,18 +1,50 @@
 //importando o express
 const express = require('express');
+
 //criando instância
 const app = express();
+
 //importando a biblioteca de sessoes
 const session = require('express-session');
+
 //configurando o gerenciamento de sessões
 app.use(session({
     //texto utilizado para aumetar a segurança das sessões
     secret:"qualquerPalavra",
     //cookie é uma referencia para sessão no servidor
     //pode-se setar o tempo de uma sessão pela 
-    //propriedade maxAge que é em milisegundos ou seja cada segundo e 1000 milisegundo
-    cookie: {maxAge: 30000}
+    //propriedade maxAge que é em milisegundos ou 
+    //seja cada segundo e 1000 milisegundo
+    cookie: {maxAge: 7200000} //duas horas de sessão
+    //o historage usado do express-session por padrão é a memória ram
+    //em um projeto de escala maior o idel é utilizar o Redis que
+    //é um banco de dados proprio para armazenamento de sessões
 }));
+
+//exemplo rota para criar a sessão
+app.get('/session',(req,res)=>{
+    //criando informações da sessão
+    req.session.treinamento = "Formação Node.js"
+    req.session.ano = 2019
+    req.session.email = 'claudisnei@teste'
+    req.session.user = {
+        username: 'claudisnei',
+        email: 'email@qualquer',
+        id:'10'
+    }
+    //resposta da rota
+    res.send('Sessão gerada');
+});
+
+//exemplo de rota para ler a sessão
+app.get('/leitura',(req,res)=>{
+    res.json({
+        treinamento: req.session.treinamento,
+        ano: req.session.ano,
+        email: req.session.email,
+        user: req.session.user
+    })
+});
 
 //importando as rotas dos controllers
 const categoriesController = require('./categories/CategoriesController');
