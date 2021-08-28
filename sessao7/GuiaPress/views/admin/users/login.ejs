@@ -1,0 +1,46 @@
+<%- include('../../partials/header.ejs');%> <%-
+include('../../partials/navbar.ejs');%>
+<div style="width: 600px; padding: 5px" class="container">
+  <div class="card mt-4">
+    <div style="text-align: center" class="card-header">
+      <h2>Login de admin</h2>
+    </div>
+    <div class="card-body">
+      <form name="form1" method="POST" action="/authenticate" onsubmit="validarCampos()">
+        <input
+          name="email"
+          type="email"
+          class="form-control"
+          placeholder="email@exemplo.com"
+        />
+        <input
+          name="password"
+          type="password"
+          class="form-control mt-3"
+          placeholder="***************"
+        />
+
+        <button type="submit" class="btn btn-block btn-success mt-3">Entrar</button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../../partials/footer.ejs');%>
+<script language="javascript" type="text/javascript">
+  function validarCampos() {
+    var email = form1.email.value;
+    var password = form1.password.value;
+
+    if (email == "") {
+      alert("Digite o email do usuario");
+      form1.email.focus();
+      return false;
+    }
+
+    if (password == "") {
+      alert("Digite a senha do usuario");
+      form1.password.focus();
+      return false;
+    }
+  }
+</script>

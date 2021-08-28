@@ -77,6 +77,44 @@ router.post('/user/delete',(req, res)=>{
     });
 });
 
+//rota para carregar o formulário de login do usuário
+router.get('/admin/users/login',(req,res)=>{
+    res.render('../views/admin/users/login');
+});
+
+//rota para fazer o login
+router.post('/authenticate',(req, res)=>{
+    //recebendo os dados do formulário
+    var email = req.body.email;
+    var password = req.body.password;
+
+    //pesquisar se existe o usuário no banco de dados
+    User.findOne({where:{mail: email}}).then(user=>{
+        if(user!= undefined){
+            //validar a senha o decript compara se a senha
+            //informada pelo usuario é igual a salva no banco de dados
+            var correct = bcrypt.compareSync(password,user.password);
+            
+            //verifica se a senha é a correta
+            if(correct){
+                //criando uma sessão user
+                req.session.user = {
+                    id: user.id,
+                    email: user.mail
+                }
+                //testando 
+                res.json(req.session.user);
+            }else{
+                res.redirect('/admin/users/login')
+            }
+
+        }else{
+            res.redirect('/admin/users/login')
+        }
+    }).catch(err =>{
+        res.send("Erro "+ err);
+    })
+});
 
 
 //exportando o router
