@@ -5,14 +5,17 @@ const { default: slugify } = require('slugify');
 const router = express.Router();
 //importanto o slugify
 const slug = require('slugify');
+//importando um middleware para autenticação do usuario
+const adminAuth = require('../middlewares/adminauth');
 
 /**Banco de dados */
 //importando o model de categorias e artigos
 const Category = require('./../categories/Category');
 const Article = require('./Article');
 
-//rota para abrir a página com a lista de artigos
-router.get('/admin/articles',(req,res)=>{
+//rota para abrir a página com a lista para edição de artigos
+//inserindo o middleware de autenticação adminAuth
+router.get('/admin/articles',adminAuth, (req,res)=>{
     //consultandos os registros da tabela de artigos
     Article.findAll(
       //  {raw:true, order:[['id','DESC']]},
@@ -23,7 +26,7 @@ router.get('/admin/articles',(req,res)=>{
 
 //criando a rota para abrir a página de cadastro de artigos e enviar as categorias que serão
 //usadas no listbox
-router.get('/admin/articles/new',(req,res)=>{
+router.get('/admin/articles/new',adminAuth,(req,res)=>{
     Category.findAll({
         raw:true, 
         order:[['id','DESC']]}).then(categories=>{
@@ -32,7 +35,7 @@ router.get('/admin/articles/new',(req,res)=>{
 });
 
 //criando a rota para salvar no banco de dados a novo artigo
-router.post('/articles/save',(req,res)=>{
+router.post('/articles/save',adminAuth,(req,res)=>{
     var categoryId = req.body.category;
     var body = req.body.article;
     var title = req.body.title;
@@ -51,7 +54,7 @@ router.post('/articles/save',(req,res)=>{
 });
 
 //criando rota para apagar um artigo no banco de dados
-router.post('/article/delete',(req,res)=>{
+router.post('/article/delete',adminAuth,(req,res)=>{
     var id = req.body.id;
     //validando o id
     if(id != undefined){
@@ -73,7 +76,7 @@ router.post('/article/delete',(req,res)=>{
 //rota para abrir a página edit.ejs de articles e
 //carregar os valores do artigo selecionado nos campos
 //do formulário
-router.get('/admin/articles/edit/:id',(req, res)=>{
+router.get('/admin/articles/edit/:id',adminAuth,(req, res)=>{
     var id = req.params.id;
     Article.findOne({
         where: {id:id},
@@ -94,7 +97,7 @@ router.get('/admin/articles/edit/:id',(req, res)=>{
 });
 
 //rota para salvar as alterações realizadas no artigo
-router.post('/articles/update',(req,res)=>{
+router.post('/articles/update',adminAuth,(req,res)=>{
     //variaveis da página de edição 
     var id = req.body.articleId;
     var title = req.body.title;

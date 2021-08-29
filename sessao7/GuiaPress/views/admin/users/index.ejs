@@ -19,13 +19,13 @@
                             <tr>
                                 <td><%= user.id %></td>
                                 <td><%= user.mail %></td>                                
-                              <!--  <td style="text-align: center;">
+                                <td style="text-align: center;">
                                     <a href="/admin/users/edit/<%= user.id%>" class="btn btn-warning" >Editar</a>
                                     <form method="POST" action="/user/delete" style="display: inline;" onsubmit="confirmarExclusao(event, this)">
                                         <button class="btn btn-danger" >Excluir</button>
                                         <input type="hidden" value="<%= user.id%>" name="userId">
                                     </form>                                    
-                                </td> -->
+                                </td> 
                             </tr>
                         <% }); %>
                     <%};%>
@@ -40,7 +40,7 @@
     function confirmarExclusao(event, form){
         event.preventDefault();
         //verifica se o usuário quer deletar
-        var decision = confirm('Você quer deletar a categoria?');
+        var decision = confirm('Você quer deletar o usuário?');
         if(decision){
            form.submit();
         };

@@ -15,6 +15,12 @@ const bcrypt = require('bcryptjs');
 
 //rota para abrir a página com a lista de usuário
 router.get('/admin/users',(req,res)=>{
+    //verifica se o usuário está logado através da sessão
+    //user
+   // if(req.session.user == undefined){
+   //     res.redirect('/');
+  //  }
+
     //consultandos os registros da tabela de usuários
     User.findAll({
         raw:true,
@@ -103,7 +109,8 @@ router.post('/authenticate',(req, res)=>{
                     email: user.mail
                 }
                 //testando 
-                res.json(req.session.user);
+                //res.json(req.session.user);
+                res.redirect('/admin/articles');
             }else{
                 res.redirect('/admin/users/login')
             }
