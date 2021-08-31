@@ -123,6 +123,13 @@ router.post('/authenticate',(req, res)=>{
     })
 });
 
+//rota para fazer o logout
+router.get('/logout',(req,res)=>{
+    //tornando a sessão user indefinida ou vazia
+    req.session.user = undefined;
+    //redirecionando para a home page
+    res.redirect('/');
+});
 
 //exportando o router
 module.exports = router;
