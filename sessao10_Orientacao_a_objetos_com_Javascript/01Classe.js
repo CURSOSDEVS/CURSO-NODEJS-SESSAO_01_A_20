@@ -1,21 +1,37 @@
-class Jogo{
+class Filme{
 
-    constructor(){
-        this.titulo = '',
-        this.genero = '',
-        this.produtora = '',
-        this.preco = 0
+    constructor(titulo,ano,genero,diretor,duracao){
+        this.titulo= titulo;
+        this.ano = ano;
+        this.genero = genero;        
+        this.diretor = diretor;        
+        this.duracao = duracao
     }
 
-    Abrir(){
-        console.log('Jogo abrindo!');
+    Reproduzir(){
+        console.log("Reproduzindo...");
     }
 
-    Carregar(){
-        console.log('Loading.....');
+    Pausar(){
+
+    }
+
+    Avancar(){
+
     }
 
     Fechar(){
-        console.log('Aperte Esc para fechar...')
+
     }
+
 }
+
+var vingadores = new Filme("Vingadores 2",2014,"Ação","Alguém","2h");
+
+/*
+console.log(`
+Titulo: ${vingadores.titulo}
+Ano: ${vingadores.ano}
+Genero: ${vingadores.genero}`);*/
+
+console.log(vingadores);
