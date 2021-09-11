@@ -1,6 +1,6 @@
 //importando a biblioteca responsavel por manipular arquivos
 const fs = require("fs");
-//recebendo o módulo do node
+//recebendo o módulo util do node
 const util = require("util");
 
 
@@ -20,6 +20,7 @@ class Reader{
 
 
     //metodo que irá receber o caminho do arquivo que será lido
+    //filepath é o parametro que criamos
     async Read(filepath){
 
         /**Essa maneira utiliza promises 
