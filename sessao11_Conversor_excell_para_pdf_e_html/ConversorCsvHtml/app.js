@@ -4,7 +4,9 @@ var Processor = require("./Processor");
 var Table = require("./Table");
 var HtmlParser = require("./HtmlParser")
 var Writer = require("./Writer");
-const { writer } = require("repl");
+var PDFWriter = require("./PDFWriter");
+//const { writer } = require("repl");
+
 
 var leitor = new Reader();
 var escritor = new Writer();
@@ -42,7 +44,10 @@ async function main(){
     //    console.log(html);
 
     /**será criado o arquivo cujo nome será o momento atual */
-    escritor.Write( Date.now()+".html",html);
+    escritor.Write( Date.now() + ".html",html);
+
+    //será criado o arquivo em pdf 
+    PDFWriter.writePDF(Date.now() + ".pdf",html);
 
 }
 
