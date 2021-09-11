@@ -1,6 +1,7 @@
 //carregando as classes
 var Reader = require("./Reader");
-var Processor = require("./Processor")
+var Processor = require("./Processor");
+var Table = require("./Table");
 
 var leitor = new Reader();
 
@@ -15,15 +16,18 @@ async function main(){
      * de string pelo método Read da classe Reader.
      */
     var dados =  await leitor.Read("./Dados.csv");
-    console.log(dados);
-
+   
     /**Variavel que irá receber os dados que foram 
      * processados na classe Processor pelo método
      * estático Process
      */
     var dadosProcessados = Processor.Process(dados);
-}
 
+    var usuarios = new Table(dadosProcessados);
+    console.log(usuarios.header);
+    console.log(usuarios.rows);
+
+}
 
 
 //rodando a aplicação.
