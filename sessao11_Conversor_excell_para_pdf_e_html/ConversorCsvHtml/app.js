@@ -3,8 +3,11 @@ var Reader = require("./Reader");
 var Processor = require("./Processor");
 var Table = require("./Table");
 var HtmlParser = require("./HtmlParser")
+var Writer = require("./Writer");
+const { writer } = require("repl");
 
 var leitor = new Reader();
+var escritor = new Writer();
 
 /**Quando utilizamos promises e async/await, retornamos
  * dados que podem ser tratados e utilizados de maneira
@@ -32,10 +35,14 @@ async function main(){
      * configurados dentro da classe HtmlParser
      */
 
+    /**html sera a variavel que irá armazenar o arquivo criado pelo ejs no HtmlParser 
+     * tomando o arquivo base table.ejs.
+     */
     var html = await HtmlParser.Parse(usuarios);
-    console.log(html);
+    //    console.log(html);
 
-   
+    /**será criado o arquivo cujo nome será o momento atual */
+    escritor.Write( Date.now()+".html",html);
 
 }
 
