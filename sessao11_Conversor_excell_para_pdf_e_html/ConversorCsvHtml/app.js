@@ -24,11 +24,23 @@ async function main(){
     var dadosProcessados = Processor.Process(dados);
 
     var usuarios = new Table(dadosProcessados);
+    /* Testes
     console.log(usuarios.header);
     console.log(usuarios.rows);
+    console.log(usuarios.RowCount);
+    console.log(usuarios.ColumnCount);
+
+    //adicionando uma nova linha á tabela de forma dinâmica
+    usuarios.rows.push(["João","Formação PHP","PHP","32"]);
+    usuarios.rows.push(["João","Formação PHP","PHP","32"]);
+    usuarios.rows.push(["João","Formação PHP","PHP","32"]);
+    usuarios.rows.push(["João","Formação PHP","PHP","32"]);
+    console.log(usuarios.RowCount);
+    console.log(usuarios.ColumnCount);
+    */
+   
 
 }
-
 
 //rodando a aplicação.
 main();
