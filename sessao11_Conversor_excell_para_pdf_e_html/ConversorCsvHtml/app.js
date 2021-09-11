@@ -2,6 +2,7 @@
 var Reader = require("./Reader");
 var Processor = require("./Processor");
 var Table = require("./Table");
+var HtmlParser = require("./HtmlParser")
 
 var leitor = new Reader();
 
@@ -24,20 +25,16 @@ async function main(){
     var dadosProcessados = Processor.Process(dados);
 
     var usuarios = new Table(dadosProcessados);
-    /* Testes
-    console.log(usuarios.header);
-    console.log(usuarios.rows);
-    console.log(usuarios.RowCount);
-    console.log(usuarios.ColumnCount);
+    
+    /**Através da classe HtmlParser pegamos os dados
+     * da tabela e com o ejs renderizamos o arquivo
+     * table.ejs com os dados e variaveis que foram
+     * configurados dentro da classe HtmlParser
+     */
 
-    //adicionando uma nova linha á tabela de forma dinâmica
-    usuarios.rows.push(["João","Formação PHP","PHP","32"]);
-    usuarios.rows.push(["João","Formação PHP","PHP","32"]);
-    usuarios.rows.push(["João","Formação PHP","PHP","32"]);
-    usuarios.rows.push(["João","Formação PHP","PHP","32"]);
-    console.log(usuarios.RowCount);
-    console.log(usuarios.ColumnCount);
-    */
+    var html = await HtmlParser.Parse(usuarios);
+    console.log(html);
+
    
 
 }
