@@ -8,14 +8,50 @@
     <hr>
     <h1>Lista de games</h1>
     <ul id="games">
-
+    
     </ul>
+    <hr>
+    <h4>Novo game</h4>
+    <input type="text" name="title" id="title" placeholder="Título"><br>
+    <input type="text" name="year" id="year" placeholder="Ano"><br>
+    <input type="number" name="price" id="price" placeholder="Preço"><br>
+    <button type="button" onclick="createGame()">Criar</button>
+    
 </head>
 <body>
     
 </body>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+
+        //função para cadastrar novos games
+        function createGame(){
+            //pegando o valor dos inputos
+            var titleInput = document.getElementById('title');
+            var yearInput = document.getElementById('year');
+            var priceInput = document.getElementById('price');
+
+            //montando um json que será enviado para a API
+            var game = {
+                title: titleInput.value,
+                year: yearInput.value,
+                price: priceInput.value
+            }
+
+            //rota para cadastrar um novo game, basta informar a rota e os dados
+            axios.post("http://localhost:45678/game",game).then(response=>{
+                //irá verificar se foi realizado o cadastro
+                if(response.status == 200 ){
+                    console.log("Game cadastrado");
+                    alert("Game cadastrado");
+                }
+            }).catch(err=>{
+                console.log(err);
+            })
+
+        }
+
+        //o axios irá executar a url para buscar todos os games 
         axios.get("http://localhost:45678/games").then(response =>{
             //a variavel games irá receber os dados da resposta
             var games = response.data;
@@ -25,7 +61,8 @@
 
             //percorrendo o array dos dados
             games.forEach(game => {
-                console.log(game);
+
+                //console.log(game);
                 //criando um item de uma lista
                 var item = document.createElement('li');
                 
@@ -40,5 +77,7 @@
         }).catch(err=>{
             console.log(err);
         });
+
+        
     </script>
 </html>

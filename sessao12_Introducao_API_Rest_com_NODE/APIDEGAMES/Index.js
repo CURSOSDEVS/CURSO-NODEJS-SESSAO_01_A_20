@@ -155,7 +155,6 @@ app.put('/game/:id',(req,res)=>{
     }
 });
 
-
 app.listen(45678,()=>{
     console.log("API rodando");
 });
