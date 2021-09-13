@@ -1,9 +1,12 @@
 //importando as bibliotecas
 const express = require("express");
-const bodyParser = require("body-parser");
-
+//const bodyParser = require("body-parser");
+const cors = require("cors");
 //criando o app
 const app = express();
+
+//iniciado o cors no app
+app.use(cors());
 
 //inicando o express com configuração básica
 app.use(express.urlencoded({extended:false}));
