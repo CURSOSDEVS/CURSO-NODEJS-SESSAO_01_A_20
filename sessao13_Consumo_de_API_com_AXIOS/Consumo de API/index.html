@@ -66,6 +66,18 @@
                 //criando um item de uma lista
                 var item = document.createElement('li');
                 
+                //setando o atributo data-id ao item
+                item.setAttribute("data-id",game.id);
+
+                //setando o atributo data-title ao item
+                item.setAttribute('data-title',game.title);
+
+                //setando o atributo data-year ao item
+                item.setAttribute('data-year',game.year);
+
+                //setando o atributo data-price ao item
+                item.setAttribute('data-price',game.price);
+
                 //vamos salvar dentro do item 'li' os dados
                 item.innerHTML = game.id + " - " + game.title + " - " + game.price;
 
