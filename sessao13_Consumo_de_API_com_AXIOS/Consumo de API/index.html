@@ -51,6 +51,19 @@
 
         }
 
+        //função para deletar um item
+        function deletarItem(listItem){
+            //capturando o id do item
+            var id = listItem.getAttribute('data-id');
+
+            //rota utilizando o axios para deletar o item 
+            axios.delete("http://localhost:45678/game/"+id).then(response=>{
+                alert("Game deletetado");
+            }).catch(err=>{
+                console.log(err);
+            });
+        }
+
         //o axios irá executar a url para buscar todos os games 
         axios.get("http://localhost:45678/games").then(response =>{
             //a variavel games irá receber os dados da resposta
@@ -80,6 +93,19 @@
 
                 //vamos salvar dentro do item 'li' os dados
                 item.innerHTML = game.id + " - " + game.title + " - " + game.price;
+
+                //criando o botão ao lado de cada item
+                var deleteItem = document.createElement("button");
+                
+                //adicionando o botão na página com o caption Deletar
+                deleteItem.innerHTML = "Deletar";
+
+                //adicionando o evento de click ao botão para executar a função de deletar
+                deleteItem.addEventListener('click',function(){
+                     deletarItem(item)});
+
+                //adicionando o botão dentro do item
+                item.appendChild(deleteItem)
 
                 //vamos adicionar o item dentro da lista
                 list.appendChild(item);
