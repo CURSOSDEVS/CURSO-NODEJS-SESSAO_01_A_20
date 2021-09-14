@@ -16,6 +16,13 @@
     <input type="text" name="year" id="year" placeholder="Ano"><br>
     <input type="number" name="price" id="price" placeholder="Preço"><br>
     <button type="button" onclick="createGame()">Criar</button>
+    <hr>
+    <h4>Editar game</h4>
+    <input type="hidden" name="id" id="id">
+    <input type="text" name="editTitle" id="editTitle" placeholder="Título"><br>
+    <input type="text" name="editYear" id="editYear" placeholder="Ano"><br>
+    <input type="number" name="editPrice" id="editPrice" placeholder="Preço"><br>
+    <button type="button" onclick="editarGame()">Salvar</button>
     
 </head>
 <body>
@@ -64,6 +71,49 @@
             });
         }
 
+        //funcão para carregar valores dentro do formulário
+         function carregarItem(item){
+             //carregando em variaveis os valores dos atributos
+             var id = item.getAttribute('data-id');
+             var title = item.getAttribute('data-title');
+             var price = item.getAttribute('data-price');
+             var year = item.getAttribute('data-year');
+            
+             //localizando os inputs e passando os valores para os inputs corretos
+             document.getElementById('editTitle').value = title;
+             document.getElementById('editYear').value = year;
+             document.getElementById('editPrice').value = price;
+             document.getElementById('id').value = id;
+
+             //console.log("Editar item "+ id);
+         }
+
+         //criando função para salvar com a rota axios para editar
+         //o game do id selecionado
+         function editarGame(){
+                //pegando o valor do id do game que será editado
+                var id = document.getElementById('id').value;
+                var title = document.getElementById('editTitle').value;
+                var price = document.getElementById('editPrice').value;
+                var year = document.getElementById('editYear').value;
+
+                //criando um json para dar um put no bd
+                var game = {
+                title: title,
+                year: year,
+                price: price
+                }
+
+                //utilizano o axios para abrir a api e editar o game
+                axios.put("http://localhost:45678/game/"+id, game).then(response =>{
+                    alert("Game atualizado! ");
+                }).catch(err=>{
+                    console.log(err);
+                });
+
+                //console.log("Id do game "+ id);
+           };
+
         //o axios irá executar a url para buscar todos os games 
         axios.get("http://localhost:45678/games").then(response =>{
             //a variavel games irá receber os dados da resposta
@@ -103,6 +153,21 @@
                 //adicionando o evento de click ao botão para executar a função de deletar
                 deleteItem.addEventListener('click',function(){
                      deletarItem(item)});
+
+                /* criando o botão de edição  do game*/
+                var editBtn = document.createElement('button');
+
+                /* adicionando o botão na página e inserindo o texto 
+                'Editar' ao botão */
+                editBtn.innerHTML = 'Editar';
+
+                /**inserindo evento de click ao botão */
+                editBtn.addEventListener('click', function(){
+                    carregarItem(item);
+                });
+
+                //adicionando o botão dentro do item
+                item.appendChild(editBtn);
 
                 //adicionando o botão dentro do item
                 item.appendChild(deleteItem)
