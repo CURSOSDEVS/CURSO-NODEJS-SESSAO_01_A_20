@@ -114,6 +114,7 @@ app.delete('/game/:id',(req,res)=>{
     }
 });
 
+
 /**endpois para edição de registros será criado uma rota 
  * utilizando o PUT
  */
