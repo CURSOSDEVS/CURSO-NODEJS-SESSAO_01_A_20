@@ -46,7 +46,7 @@
             }
 
             //rota para cadastrar um novo game, basta informar a rota e os dados
-            axios.post("http://localhost:45678/game",game).then(response=>{
+            axios.post("http://localhost:4040/game",game).then(response=>{
                 //irá verificar se foi realizado o cadastro
                 if(response.status == 200 ){
                     console.log("Game cadastrado");
@@ -64,7 +64,7 @@
             var id = listItem.getAttribute('data-id');
 
             //rota utilizando o axios para deletar o item 
-            axios.delete("http://localhost:45678/game/"+id).then(response=>{
+            axios.delete("http://localhost:4040/game/"+id).then(response=>{
                 alert("Game deletetado");
             }).catch(err=>{
                 console.log(err);
@@ -105,7 +105,7 @@
                 }
 
                 //utilizano o axios para abrir a api e editar o game
-                axios.put("http://localhost:45678/game/"+id, game).then(response =>{
+                axios.put("http://localhost:4040/game/"+id, game).then(response =>{
                     alert("Game atualizado! ");
                 }).catch(err=>{
                     console.log(err);
@@ -115,7 +115,7 @@
            };
 
         //o axios irá executar a url para buscar todos os games 
-        axios.get("http://localhost:45678/games").then(response =>{
+        axios.get("http://localhost:4040/games").then(response =>{
             //a variavel games irá receber os dados da resposta
             var games = response.data;
 

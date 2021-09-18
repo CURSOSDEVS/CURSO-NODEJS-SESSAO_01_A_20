@@ -39,7 +39,7 @@ var DB = {
  * os games do sistema
  */
 app.get('/games',(req,res)=>{
-    res.statusCode = 200;
+    res.status(200);
     res.json(DB.games);
 });
 
@@ -156,7 +156,7 @@ app.put('/game/:id',(req,res)=>{
     }
 });
 
-app.listen(45678,()=>{
+app.listen(4040,()=>{
     console.log("API rodando");
 });
 

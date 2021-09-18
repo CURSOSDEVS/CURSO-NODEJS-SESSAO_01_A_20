@@ -1,27 +1,12 @@
 //importando as bibliotecas
 const express = require("express");
+//const bodyParser = require("body-parser");
 const cors = require("cors");
-const sequelize = require("sequelize");
-const connection = require("./database/database");
-
-//criando a autenticação com o banco de dados
-connection.authenticate().then(()=>{
-    console.log("Conexão OK!")
-}).catch(err=>{
-    console.log("Erro: "+ err);
-});
-
-//importando os models
-const User = require('./model/User');
-const Game = require('./model/Game');
-
 //criando o app
 const app = express();
-
-//instanciando a biblioteca jsonwebtoken para autenticação
+//instanciando a biblioteca jsonwebtoken
 const jwt = require("jsonwebtoken");
-
-//criando uma chave secreta para o jwt para realizar a autenticação
+//criando uma chave secreta para o jwt
 const secretKeyJwt = "ffhhae@#$¨%fdd!@#4";
 
 //iniciado o cors no app
@@ -33,16 +18,13 @@ app.use(express.json());
 
 //midleware para realizar a autenticação antes da rota ser executada
 function auth(req, res, next){
-
     //pegando o header de autorização
     const authToken = req.headers['authorization']
 
     //validando o token
-    if(authToken != undefined){
-
+    if(authToken !=undefined){
         //cortando o token
         const bearer = authToken.split(' ');
-
         //pegando somente o token
         var token = bearer[1];
 
@@ -59,25 +41,22 @@ function auth(req, res, next){
                 req.token = token;
                 req.logedUser = {id: data.id, email: data.email};
                 //console.log(data);
-
-                //se autenticação foi realizada com sucesso a função next que irá 
-                //realizar a requisição do usuário
                 next();
             }
         });
 
-       // console.log(bearer);
+        console.log(bearer);
     }else{
         res.status(401);
         res.json({err:"Token inválido"});
     }
 
     //console.log(authToken);
-    
+    //se autenticação foi realizada com sucesso a função next que irá 
+    //realizar a requisição do usuário
     
 }
 
-/**
 var DB = {
     games:[
         {
@@ -113,26 +92,14 @@ var DB = {
         password:"teste123"
     }
 ]
-}*/
+}
 
 /**primeira rota no primeiro end point que deverá listar todos
  * os games do sistema, incluindo o midleware de autenticação auth
  */
-
 app.get('/games',auth,(req,res)=>{
     res.statusCode = 200;
-    //res.json({user: req.logedUser, games: DB.games});
-    var games = Game.findAll().then(()=>{
-        res.statusCode = 200;
-        res.sendStatus(200);
-        res.json(games)
-        console.log("Jogos Carregados!");
-    }).catch(err=>{
-        res.sendStatus = 404;
-        res.sendStatus(404);
-        console("Erro : "+err);
-    });
-
+    res.json({user: req.logedUser, games: DB.games});
 });
 
 /**rota para devolver ao usuário o game pelo ID */
