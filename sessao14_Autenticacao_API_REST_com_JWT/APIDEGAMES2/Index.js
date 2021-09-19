@@ -257,7 +257,7 @@ app.put('/game/:id',auth,(req,res)=>{
             if(year == undefined){
                 year = game.year;
             }
-            if(price = undefined){
+            if(price == undefined){
                 price = game.price;
             }
 
