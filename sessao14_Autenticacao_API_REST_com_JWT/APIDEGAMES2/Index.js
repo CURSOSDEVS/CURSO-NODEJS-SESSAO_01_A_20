@@ -36,7 +36,7 @@ app.use(express.json());
 //midleware para realizar a autenticação antes da rota ser executada
 function auth(req, res, next){
 
-    //pegando o header de autorização
+    //pegando o header de autorização da requisição
     const authToken = req.headers['authorization']
 
     //validando o token
@@ -79,6 +79,57 @@ function auth(req, res, next){
     
 }
 
+
+/**rota para autenticação */
+app.post("/auth",(req,res)=>{
+    var {id, email, password} = req.body;
+
+    //validações
+    if(email != undefined){
+        User.findOne({where:{email:email}}).then((user)=>{
+            if(user != undefined){
+                if(user.password === password){
+                    /**deve-se passar as informações necessárias
+                     * , a chave secreta e o prazo que irá expirar 
+                     * o token
+                     */                    
+                    jwt.sign(
+                        {
+                            id: user.id,
+                            email: user.email
+                        },
+                        secretKeyJwt,
+                        {expiresIn:'48h'},(err, token)=>{
+                            if(err){
+                                res.status(400);
+                                res.json({err: "Falha interna"});
+                            }else{
+                                res.status(200);
+                                res.json({token: token});
+                            }
+                        }) 
+    
+                }else{
+                    res.status(401);
+                    res.json({err: "Email ou senha inválidos1", p: user.password , p2: password});
+                }
+    
+            }else{
+                res.status(404);
+                res.json({err: "Email ou senha inválidos2"});
+            }
+        }).catch(err=>{
+            res.status(400);
+            res.json({err:"Erro :"+err});
+        });
+
+    }else{
+        res.status(401);
+        res.json({err: "O email enviado é inválido."});
+    }
+});
+
+
 /**primeira rota no primeiro end point que deverá listar todos
  * os games do sistema, incluindo o midleware de autenticação auth
  */
@@ -90,7 +141,11 @@ app.get('/games',auth,(req,res)=>{
         if(games !=undefined){            
             res.status(200);
            // res.sendStatus(200);
-            res.json({user: req.logedUser, games: games});
+           //json que irá mostrar os games do banco de dados
+           //e o usuário que foi autenticado na funcao auth
+            //res.json({user: req.logedUser, games: games});
+            res.json(games);
+           // res.send(games);
             console.log("Jogos carregados com sucesso.");
            }
     }).catch(err=>{
@@ -100,8 +155,6 @@ app.get('/games',auth,(req,res)=>{
         console.log('Erro: '+ err);      
     });
    // res.statusCode = 200;
-   
-   
 });
 
 /**rota para devolver ao usuário o game pelo ID */
@@ -223,56 +276,6 @@ app.put('/game/:id',auth,(req,res)=>{
     }
 });
 
-
-
-/**rota para autenticação */
-app.post("/auth",(req,res)=>{
-    var {id, email, password} = req.body;
-
-    //validações
-    if(email != undefined){
-        User.findOne({where:{email:email}}).then((user)=>{
-            if(user != undefined){
-                if(user.password === password){
-                    /**deve-se passar as informações necessárias
-                     * , a chave secreta e o prazo que irá expirar 
-                     * o token
-                     */                    
-                    jwt.sign(
-                        {
-                            id: user.id,
-                            email: user.email
-                        },
-                        secretKeyJwt,
-                        {expiresIn:'48h'},(err, token)=>{
-                            if(err){
-                                res.status(400);
-                                res.json({err: "Falha interna"});
-                            }else{
-                                res.status(200);
-                                res.json({token: token});
-                            }
-                        }) 
-    
-                }else{
-                    res.status(401);
-                    res.json({err: "Email ou senha inválidos1", p: user.password , p2: password});
-                }
-    
-            }else{
-                res.status(404);
-                res.json({err: "Email ou senha inválidos2"});
-            }
-        }).catch(err=>{
-            res.status(401);
-            res.json({err:"Erro :"+err});
-        });
-
-    }else{
-        res.status(400);
-        res.json({err: "O email enviado é inválido."});
-    }
-});
 
 
 app.listen(4040,()=>{
