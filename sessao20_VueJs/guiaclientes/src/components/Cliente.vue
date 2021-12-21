@@ -1,12 +1,24 @@
 <template>
     <div id="cliente">
-        <h1 id="cliente-nome">Cliente aqui</h1>
-        <h3>Descrição do Cliente bla bla bla bla bla</h3>
+        <h1 id="cliente-nome">Cliente</h1>
+        <h3>Nome do cliente: {{nome}}</h3>
+        <p>Descrição do cliente: {{descricao}}</p>
+        
     </div>  
 </template>
 
 <script>
 export default {
+
+    data(){
+        return {
+            nome : "Joâo da Silva",
+            numero: "",
+            email: "",
+            idade: 80,
+            descricao: "Lorem ipsum lorem ipson"
+        }
+    }
     
 }
 </script>
