@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <h1>Guia Clientes</h1>
-    <input type="text" v-model="clienteVictor.nome"/>
-    <cliente :cliente="clienteVictor"/>
-    <cliente :cliente="clienteVictor"/>
-    <cliente :cliente="clienteVictor"/>
-    <cliente :cliente="clienteVictor"/>
+    <input type="text" v-model="clienteVictor.nome" />
+
+    <cliente :cliente="clienteVictor" :showIdade="false"/>
+    <cliente :cliente="clienteVictor" :showIdade="true"/>
+    <cliente :cliente="clienteVictor" :showIdade="false"/>
+    <cliente :cliente="clienteVictor" :showIdade="true"/>
   </div>
 </template>
 
@@ -21,7 +22,6 @@
 
       data(){
         return {
-          nomeDoVictor: "Victor O. Lima",
           clienteVictor: {
             nome: "Victor Lima",
             email: "Victor@lima",
