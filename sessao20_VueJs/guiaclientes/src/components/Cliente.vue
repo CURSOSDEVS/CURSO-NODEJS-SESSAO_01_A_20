@@ -1,18 +1,9 @@
 <template>
     <div id="cliente">
-        <h1 id="cliente-nome">Cliente</h1>
+        <h4>Nome: {{cliente.nome}}</h4>
         <hr>
-        <h3>One way data bind</h3>        
-        <input type="text" :value="nome"><br><br>
-        <input type="text" :value="descricao">
-        <hr>
-        <h3>Two way data bind</h3>
-        <input type="text" v-model="nome"><br><br>
-        <input type="text" v-model="descricao">
-        <hr>
-        <h3>Nome do cliente: {{nome}}</h3>
-        <p>Descrição do cliente: {{descricao}}</p>
-        
+        <p>Email: {{cliente.email}}</p>
+        <p>Idade: {{cliente.idade}}</p>
     </div>  
 </template>
 
@@ -21,12 +12,17 @@ export default {
 
     data(){
         return {
-            nome : "Joâo da Silva",
-            numero: "",
-            email: "",
-            idade: 80,
+            numero: "2",
             descricao: "Lorem ipsum lorem ipson"
         }
+    },
+
+    props: {
+        nome: String,
+        email: String,
+        idade: Number,
+        //tipo objeto
+        cliente: Object
     }
     
 }
@@ -34,12 +30,11 @@ export default {
 
 <style scoped>
     #cliente{
-        color: blue;
-        background-color: beige;
+        background-color: #ECE5E3;
         max-width: 600px;
-        height: 100px;
+        height: 180px;
+        padding: 1%;
+        margin-top: 2%;
     }
-    #cliente-nome{
-        color: green;
-    }
+    
 </style>
