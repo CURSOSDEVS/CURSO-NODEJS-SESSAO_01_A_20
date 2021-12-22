@@ -1,6 +1,15 @@
 <template>
     <div id="cliente">
         <h1 id="cliente-nome">Cliente</h1>
+        <hr>
+        <h3>One way data bind</h3>        
+        <input type="text" :value="nome"><br><br>
+        <input type="text" :value="descricao">
+        <hr>
+        <h3>Two way data bind</h3>
+        <input type="text" v-model="nome"><br><br>
+        <input type="text" v-model="descricao">
+        <hr>
         <h3>Nome do cliente: {{nome}}</h3>
         <p>Descrição do cliente: {{descricao}}</p>
         
