@@ -2,6 +2,7 @@
   <div id="app">
     <h1>Guia Clientes</h1>
     <h3>Cadastro:</h3>
+    <small id="nomeErro" v-show="deuErro">O nome é invalido!, tente novamente</small><br>
     <input type="text" placeholder="nome" v-model="nomeField"><br>
     <input type="email" placeholder="email" v-model="emailField"><br>
     <input type="number" placeholder="idade" v-model="idadeField"><br>
@@ -32,6 +33,9 @@
           nomeField:"",
           emailField:"",
           idadeField: 0,
+
+          //variavel para verificar se o usuário digitou corretamente o nome do usuário
+          deuErro: false,
 
           clientes: [
             {
@@ -64,10 +68,17 @@
 
       methods:{
         cadastrarUsuario: function(){
-          this.clientes.push({nome: this.nomeField, email: this.emailField, idade: this.idadeField, id: Date.now()}),
-          this.nomeField= "",
-          this.idadeField="",
-          this.emailField=""
+          //verificando se o campo é vazio
+          if(this.nomeField =="" || this.nomeField==" "|| this.nomeField < 3){
+            //console.log("Erro de validação")
+            this.deuErro= true;
+          }else{
+            this.deuErro=false;
+            this.clientes.push({nome: this.nomeField, email: this.emailField, idade: this.idadeField, id: Date.now()}),
+            this.nomeField= "",
+            this.idadeField="",
+            this.emailField=""
+          }
         }
       }
     
@@ -75,5 +86,7 @@
 </script>
 
 <style>
-
+  #nomeErro{
+    color: red;
+  }
 </style>
