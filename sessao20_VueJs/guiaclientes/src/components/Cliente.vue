@@ -1,5 +1,5 @@
 <template>
-    <div id="cliente">
+    <div :class="{'cliente': !isPremiun,'cliente-premium':isPremiun}">
         <h4>Nome: {{cliente.nome}}</h4>
         <hr>
         <p>Email: {{cliente.email}}</p>
@@ -13,7 +13,7 @@ export default {
 
     data(){
         return {
-           
+           isPremiun: true
         }
     },
 
@@ -28,8 +28,17 @@ export default {
 </script>
 
 <style scoped>
-    #cliente{
+    .cliente{
         background-color: #ECE5E3;
+        max-width: 600px;
+        height: 180px;
+        padding: 1%;
+        margin-top: 2%;
+    }
+
+    .cliente-premium{
+        background-color: black;
+        color: yellow;
         max-width: 600px;
         height: 180px;
         padding: 1%;
