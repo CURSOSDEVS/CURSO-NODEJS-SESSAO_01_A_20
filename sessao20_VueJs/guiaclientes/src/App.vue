@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <h1>Guia Clientes</h1>
-    <input type="text" v-model="clienteVictor.nome" />
-    
+    <h3>Cadastro:</h3>
+    <input type="text" placeholder="nome" v-model="nomeField"><br>
+    <input type="email" placeholder="email" v-model="emailField"><br>
+    <input type="number" placeholder="idade" v-model="idadeField"><br>
+    <button @click="cadastrarUsuario">Cadastrar</button>
+
     <div v-for="(cliente,index) in clientes" :key="cliente.id">
       <h4> {{index + 1}} </h4>
       <cliente :cliente="cliente"/>
       <hr>
-      <h4>Edição:</h4>
-      <input type="text" v-model="cliente.nome">
-      <input type="text" v-model="cliente.email">
     </div>
 
   </div>
@@ -23,16 +24,15 @@
 
       components:{
         Cliente
-           
       },
 
       data(){
         return {
-          clienteVictor: {
-            nome: "Debora Sobrinho",
-            email: "debora@s",
-            idade: 40
-          },
+          //variáveis temporárias para salvar os dados no array clientes
+          nomeField:"",
+          emailField:"",
+          idadeField: 0,
+
           clientes: [
             {
               id: 2,
@@ -59,6 +59,15 @@
             idade: 40
             }
           ]
+        }
+      },
+
+      methods:{
+        cadastrarUsuario: function(){
+          this.clientes.push({nome: this.nomeField, email: this.emailField, idade: this.idadeField, id: Date.now()}),
+          this.nomeField= "",
+          this.idadeField="",
+          this.emailField=""
         }
       }
     
