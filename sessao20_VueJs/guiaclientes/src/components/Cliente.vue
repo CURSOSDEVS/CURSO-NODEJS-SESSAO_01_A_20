@@ -7,6 +7,8 @@
         <p v-else >O Usuário escondeu a idade</p>
         <button @click="mudarCor($event)">Mudar a cor</button>
         <button @click="emitirEventoDelete">Deletar</button>
+        <hr>
+        <h4>Id Especial: {{idEspecial}}</h4>
 
     </div>  
 </template>
@@ -44,6 +46,12 @@ export default {
         processarEmail: function(value){
             return value.toUpperCase();
         }
+    },
+    computed:{
+        idEspecial: function(){
+            return (this.cliente.email + this.cliente.nome + this.cliente.id).toUpperCase(); 
+           
+        }
     }
 }
 </script>
@@ -52,7 +60,7 @@ export default {
     .cliente{
         background-color: #ECE5E3;
         max-width: 600px;
-        height: 180px;
+        height: auto;
         padding: 1%;
         margin-top: 2%;
     }
@@ -61,7 +69,7 @@ export default {
         background-color: black;
         color: yellow;
         max-width: 600px;
-        height: 180px;
+        height: auto;
         padding: 1%;
         margin-top: 2%;
     }
