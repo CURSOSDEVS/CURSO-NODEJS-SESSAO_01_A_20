@@ -10,7 +10,7 @@
 
     <div v-for="(cliente,index) in clientes" :key="cliente.id">
       <h4> {{index + 1}} </h4>
-      <cliente :cliente="cliente"/>
+      <cliente :cliente="cliente" @meDelete="deletarUsuario($event)" />
       <hr>
     </div>
 
@@ -79,6 +79,17 @@
             this.idadeField="",
             this.emailField=""
           }
+        },
+
+        deletarUsuario: function($event){
+         // console.log("Recebendo evento!");
+         // console.log($event);
+         // console.log($event.component.idCliente);
+         // $event.component.testar();
+         var id = $event.idCliente;
+         var novoArray = this.clientes.filter(cliente => cliente.id != id)
+         this.clientes = novoArray;
+          
         }
       }
     
