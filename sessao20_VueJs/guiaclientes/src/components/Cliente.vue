@@ -2,7 +2,7 @@
     <div :class="{'cliente': !isPremiun,'cliente-premium':isPremiun}">
         <h4>Nome: {{cliente.nome}}</h4>
         <hr>
-        <p>Email: {{cliente.email}}</p>
+        <p>Email: {{cliente.email | processarEmail}}</p>
         <p v-if="showIdade == false">Idade: {{cliente.idade}}</p>
         <p v-else >O Usuário escondeu a idade</p>
         <button @click="mudarCor($event)">Mudar a cor</button>
@@ -37,16 +37,14 @@ export default {
             //console.log("Emitindo um filho");
             //utilizamos este atributo para emitir um evento que será chamado meDelete para o app Pai
             //podemos enviar qualque dados pelo evento
-            this.$emit("meDelete", {idCliente:this.cliente.id,  curso:"Formação nodeJS", emPromocao: true, component: this});
-        },
-
-        testar: function(){
-            //console.log("Testando metodo filho");
-           // alert("Evento do filho")
+            this.$emit("meDelete", {idCliente:this.cliente.id, component: this});
+        }     
+    },
+    filters:{
+        processarEmail: function(value){
+            return value.toUpperCase();
         }
-    
     }
-    
 }
 </script>
 
