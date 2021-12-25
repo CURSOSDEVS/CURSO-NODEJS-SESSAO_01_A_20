@@ -42,11 +42,13 @@ export default {
             this.$emit("meDelete", {idCliente:this.cliente.id, component: this});
         }     
     },
+
     filters:{
         processarEmail: function(value){
             return value.toUpperCase();
         }
     },
+    
     computed:{
         idEspecial: function(){
             return (this.cliente.email + this.cliente.nome + this.cliente.id).toUpperCase(); 

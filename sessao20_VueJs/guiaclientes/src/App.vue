@@ -1,5 +1,14 @@
 <template>
   <div id="app">
+
+    <!--Codigo de teste do bulma no projeto-->
+    <div class="buttons">
+      <button class="button is-primary is-light">Primary</button>
+      <button class="button is-link is-light">Link</button>
+    </div>
+
+    <!--Final do cógido de teste do bulma-->
+
     <h1>Guia Clientes</h1>
     <h3>Cadastro:</h3>
     <small id="nomeErro" v-show="deuErro">O nome é invalido!, tente novamente</small><br>
@@ -91,15 +100,14 @@
          var novoArray = this.clientes.filter(cliente => cliente.id != id)
          this.clientes = novoArray;
           
-        },
+        }
+      },
 
-        computed: {
+      computed: {
           orderClientes: function(){
-            return _.orderBy(this.clientes,['nome'],['desc']);
+            return _.orderBy(this.clientes,['nome'],['asc']);
           }
         }
-
-      }
     
     }
 </script>
